@@ -238,7 +238,7 @@
                                                                         deleteUrl:"<?php echo base_url('pegawai/profil_pegawai/hapus_dokumen/'.$klkn->id_kelengkapan); ?>",
                                                                         showCaption: false, 
                                                                         showRemove: false,
-                                                                        showUpload: true,
+                                                                        showUpload: false,
                                                                         maxFileCount: 1,
                                                                         dropZoneEnabled: false,
                                                                         pdfRendererUrl: 'https://plugins.krajee.com/pdfjs/web/viewer.html',

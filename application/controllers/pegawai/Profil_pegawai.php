@@ -48,7 +48,7 @@ class Profil_pegawai extends CI_Controller
     {
         $bks = $this->model_master_berkas->tampil_by_id($berkas_id);
         $pgw = $this->model_pegawai->tampil_by_id($id);
-        $cek_kelengkapan = $this->db->get_where('kelengkapan', ['pegawai_id' => $id, 'berkas_id' => $berkas_id])->result();    
+        $cek_kelengkapan = $this->db->get_where('kelengkapan', ['pegawai_id' => $id, 'berkas_id' => $berkas_id])->row();    
 
         $new_name = $bks->nb.'_'.$pgw->nip;
         $config['file_name'] = $new_name;
@@ -70,7 +70,7 @@ class Profil_pegawai extends CI_Controller
                 }
             }
        if($cek_kelengkapan != null){ 
-            $id_kelengkapan= $cek_kelengkapan['id_kelengkapan'];
+            $id_kelengkapan= $cek_kelengkapan->id_kelengkapan;
             $where = ['id_kelengkapan' => $id_kelengkapan];
             $data = [
                 'berkas_id' => $cek_kelengkapan->berkas_id,
