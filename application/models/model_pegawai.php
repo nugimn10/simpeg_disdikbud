@@ -19,6 +19,24 @@ class Model_pegawai extends CI_Model
     {
         return $this->db->get_where('pegawai', ['id_pegawai' => $id])->row();
     }
+    public function tampil_izin_by_id($id)
+    {
+        return $this->db->get_where('izin', ['pegawai_id' => $id])->row();
+    }
+
+    public function tampil_semua_izin()
+    {
+
+        $this->db->select('*');
+        $this->db->from('izin');
+        $this->db->join('pegawai','izin.pegawai_id=pegawai.id_pegawai');
+        $this->db->order_by('tgl_dibuat','asc');
+        $query = $this->db->get();
+        return $query->result();
+
+        // $query = $this->db->get('izin');
+        // return $query->result();
+    }
 
     public function tambah_pegawai($data)
     {
@@ -35,5 +53,11 @@ class Model_pegawai extends CI_Model
     {
         // $this->db->where('id_pegawai', $id);
         $this->db->delete('pegawai', ['id_pegawai' => $id]);
+    }
+
+    public function tampil_kgb($tgl_kngj)
+    {
+        // $this->db->where('id_pegawai', $id);
+        $this->db->get_where('pegawai', ['tgl_knk_pkt' => $tgl_kngj]);
     }
 }

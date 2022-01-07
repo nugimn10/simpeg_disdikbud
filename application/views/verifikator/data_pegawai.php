@@ -18,7 +18,7 @@
         <input type="submit" value = "Search" />
     </form> -->
         <!-- table -->
-        <table class="table table-bordered">
+        <table id="dataTables" class="table table-bordered">
             <thead class="thead-light">
                 <tr>
                     <th>NO</th>
@@ -26,31 +26,30 @@
                     <th>NAMA PEGAWAI</th>
                     <th>JENIS KELAMIN</th>
                     <th>UNIT KERJA</th>
-                    <th>DALAM TAHAP</th>
-                    <th colspan="3">AKSI</th>
+                    <th>AKSI</th>
                 </tr>
             </thead>
-
+            
+            
+            <tbody>
             <?php $no = 1;
             foreach ($pegawai as $pgw) : ?>
-                <tbody>
+                <?php if ($pgw->stts_knk_pkt == 2 ) {?>
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $pgw->nip ?></td>
                         <td style="width: 150px;"><?php echo $pgw->nm_pegawai ?></td>
                         <td style="width: 150px;"><?php echo $pgw->jk ?></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $pgw->uk ?></td>
                         <td style="width:150px;">
 
-                            <?php echo anchor('p' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Periksa</button>') ?>
+                            <?php echo anchor('verifikator/kenaikan_pangkat/periksa/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Periksa</button>') ?>
 
                         </td>
-
                     </tr>
+                <?php }?>
+                <?php endforeach; ?>
                 </tbody>
-
-            <?php endforeach; ?>
         </table>
 
     </div>

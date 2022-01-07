@@ -120,7 +120,7 @@
                                     <input type="text" name="tpt_lhr" id="tpt_lhr" class="form-control" value="<?php echo $pegawai->tpt_lhr ?>">
                                 </div>
                                 <div class="col-md-6 input-group">
-                                    <input type="date" name="tgl_lhr" id="tgl_lhr" class="form-control" value="<?php echo $pegawai->tgl_lhr ?>">
+                                    <input type="date" name="tgl_lhr" id="tgl_lhr" class="form-control" data-date-format="DD/MMM/YYYY" placeholder="dd/mm/yyyy" value="<?php echo $pegawai->tgl_lhr ?>">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                                     </div>
@@ -243,10 +243,10 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
-                            <label for="tgl_msk">Tanggal Masuk</label>
+                            <label for="tgl_msk">TMT CPNS/PPPK/Honorer</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="date" name="tgl_msk" id="tgl_msk" class="form-control" value="<?php echo $pegawai->tgl_msk ?>">
+                            <input type="date" name="tgl_msk" id="tgl_msk" data-date-format="DD/MMM/YYYY" placeholder="dd/mm/yyyy" class="form-control" value="<?php echo $pegawai->tgl_msk ?>">
                         </div>
                     </div>
                 </div>
@@ -254,10 +254,10 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right">
-                            <label for="tgl_knk_pkt">Tanggal Kenaikan Pangkat</label>
+                            <label for="tgl_knk_pkt">TMT Pangkat Terakhir</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="date" name="tgl_knk_pkt" id="tgl_knk_pkt" class="form-control" value="<?php echo $pegawai->tgl_knk_pkt ?>">
+                            <input type="date" name="tgl_knk_pkt" id="tgl_knk_pkt" data-date-format="DD/MMM/YYYY" placeholder="dd/mm/yyyy" class="form-control" value="<?php echo $pegawai->tgl_knk_pkt ?>">
                         </div>
                     </div>
                 </div>
@@ -268,7 +268,7 @@
                             <label for="tgl_knk_gj">Tanggal Kenaikan Gaji</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="date" name="tgl_knk_gj" id="tgl_knk_gj" class="form-control" value="<?php echo $pegawai->tgl_knk_gj ?>">
+                            <input type="date" name="tgl_knk_gj" id="tgl_knk_gj" data-date-format="DD/MMM/YYYY" placeholder="dd/mm/yyyy" class="form-control" value="<?php echo $pegawai->tgl_knk_gj ?>">
                         </div>
                     </div>
                 </div>

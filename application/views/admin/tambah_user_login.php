@@ -96,7 +96,8 @@
                             <select class="form-control" name="level" id="level">
                                 <option selected>Pilih Level</option>
                                 <option>Administrator</option>
-                                <option>Tim Penilai</option>
+                                <option>Verifikator</option>
+                                <option>Supervisor</option>
                                 <option>Pegawai</option>
                             </select>
                         </div>

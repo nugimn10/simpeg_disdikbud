@@ -14,7 +14,7 @@
 
             <nav class="navbar navbar-light">
                 <span class="navbar-brand m-0">
-                    <h4><strong>SIMPEG DISDIKBUD</strong></h4>
+                    <h4><strong>SIMPEG DISDIK</strong></h4>
                 </span>
             </nav>
 

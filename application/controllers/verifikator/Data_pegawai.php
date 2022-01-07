@@ -116,7 +116,7 @@ class Data_pegawai extends CI_Controller
             $data = [
                 'title' => 'Halaman Edit Data Pegawai',
                 'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
-                'pegawai' => $this->model_pegawai->tampil_by_id($id),
+                'pegawai' => $this->model_pegawai->tampil_by_id($id),   
                 'jenkel' => ['Laki-laki', 'Perempuan'],
                 'agama' => ['Islam', 'Katolik', 'Kristen Protestan', 'Hindu', 'Buddha', 'Kong Hu Cu'],
                 'gol_darah' => ['-', 'A', 'AB', 'B', 'O'],

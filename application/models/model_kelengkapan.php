@@ -9,7 +9,7 @@ class Model_kelengkapan extends CI_Model
 
     public function tampil_by_id_pegawai($id)
     {
-        return $this->db->get_where('kelengkapan', ['pegawai_id' => $id])->result();
+        return $this->db->order_by('berkas_id', 'asc')->get_where('kelengkapan', ['pegawai_id' => $id])->result();
     }
     public function tampil_by_id($id)
     {

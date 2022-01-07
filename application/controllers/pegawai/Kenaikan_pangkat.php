@@ -1,6 +1,11 @@
 <?php
+defined('BASEPATH') or exit('No Direct script access allowed');
 
-class Registrasi extends CI_Controller
+require_once APPPATH . "third_party/dompdf/autoload.inc.php";
+
+use Dompdf\Dompdf;
+
+class Kenaikan_pangkat extends CI_Controller    
 {
     public function __construct()
     {
@@ -17,93 +22,74 @@ class Registrasi extends CI_Controller
         }
     }
 
-    public function daftar()
+    public function ajukan($id)
     {
-        $this->form_validation->set_rules('nip', 'NIP', 'required');
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
 
-        if ($this->form_validation->run() == false) {
-            $data = [
-                'title' => 'Daftar Akun Simpeg'
-            ];
+        $data = [
+            'nip'        => $pegawai->nip,
+            'nik'        => $pegawai->nik,
+            'nuptk'      => $pegawai->nuptk,
+            'nm_pegawai' => $pegawai->nm_pegawai,
+            'jk'         => $pegawai->jk,
+            'uk'         => $pegawai->uk,
+            'noserdik'   => $pegawai->noserdik,
+            'kec'        => $pegawai->kec,
+            'tpt_lhr'    => $pegawai->tpt_lhr,
+            'tgl_lhr'    => $pegawai->tgl_lhr,
+            'agama'      => $pegawai->agama,
+            'gol_darah'   => $pegawai->gol_darah,
+            'stts_pnkh'   => $pegawai->stts_pnkh,
+            'stts_kpgw'   => $pegawai->stts_kpgw,
+            'no_hp'      => $pegawai->no_hp,
+            'email'      => $pegawai->email,
+            'alamat'     => $pegawai->alamat,
+            'tgl_msk'    => $pegawai->tgl_msk,
+            'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+            'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+            'status' => $pegawai->status,
+            'stts_knk_pkt' => "1"
+        ];
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data);
+        $this->session->set_flashdata('message', 'Diubah');
+        redirect('pegawai/profil_pegawai/detail/'.$id);
+    }
 
-                $this->load->view('templates/header', $data);
-                // $this->load->view('templates/sidebar-admin');
-                $this->load->view('templates/topbar-default');
+    public function pak($id){
+        $this->load->library('dompdf_gen');
 
-                $this->load->view('auth/cari');
-                $this->load->view('templates/footer');
-                $this->load->view('templates/javascript');
-            } else {
-                $nip        = $this->input->post('nip');
-                $nik        = $this->input->post('nik');
-                $nuptk      = $this->input->post('nuptk');
-                $nm_pegawai = $this->input->post('nm_pegawai');
-                $jk         = $this->input->post('jk');
-                $tpt_lhr    = $this->input->post('tpt_lhr');
-                $tgl_lhr    = $this->input->post('tgl_lhr');
-                $agama      = $this->input->post('agama');
-                $gol_darah  = $this->input->post('gol_darah');
-                $stts_pnkh  = $this->input->post('stts_pnkh');
-                $stts_kpgw  = $this->input->post('stts_kpgw');
-                $no_hp      = $this->input->post('no_hp');
-                $email      = $this->input->post('email');
-                $alamat     = $this->input->post('alamat');
-                $tgl_msk    = $this->input->post('tgl_msk');
-                $tgl_knk_pkt = $this->input->post('tgl_knk_pkt');
-                $tgl_knk_gj = $this->input->post('tgl_knk_gj');
-    
-                $data1 = [
-                    'nip'        => $nip,
-                    'nik'        => $nik,
-                    'nuptk'        => $nuptk,
-                    'nm_pegawai' => $nm_pegawai,
-                    'jk'         => $jk,
-                    'tpt_lhr'    => $tpt_lhr,
-                    'tgl_lhr'    => $tgl_lhr,
-                    'agama'      => $agama,
-                    'gol_darah'   => $gol_darah,
-                    'stts_pnkh'   => $stts_pnkh,
-                    'stts_kpgw'   => $stts_kpgw,
-                    'no_hp'      => $no_hp,
-                    'email'      => $email,
-                    'alamat'     => $alamat,
-                    'tgl_msk'    => $tgl_msk,
-                    'tgl_knk_pkt' => $tgl_knk_pkt,
-                    'tgl_knk_gj'  => $tgl_knk_gj
-                ];
-                
+        $data = [
+            'title' => 'Halaman Cetak PAK',
+            'detail' => $this->model_pegawai->tampil_by_id($id),
+            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
+            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
+            'ak' => $this->model_ak->tampil_semua(),
+            'pak' => $this->model_pak->tampil_by_id_pegawai($id),
+            'sekolah' => $this->model_sekolah->tampil_by_id_pegawai($id),
+            'jabatan' => $this->model_jabatan->tampil_by_id_pegawai($id),
+            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
+            'berkas' => $this->model_master_berkas->tampil_semua(),
+            'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
+            'surat_pak' => $this->db->get_where('surat_pak',['pegawai_id' => $id])->row(),
+            'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id)
+        ];
+        // $dump = $this->model_pak->tampil_by_id_pegawai($id);
+        // var_dump($dump);
 
-                $nama = $this->input->post('nama');
-                $id_pegawai = $this->input->post('id_pegawai');
-                $username = $this->input->post('username');
-                $email = $this->input->post('email');
-                $password = $this->input->post('password');
-                $no_hp = $this->input->post('no_hp');
-                $level = $this->input->post('level');
+        $detail = $this->model_pegawai->tampil_by_id($id);
+        $this->load->view('pegawai/pak', $data);
+        
+        $paper_size = 'Legal';
+        $orientation = 'portrait';
 
-                $data2 = [
-                    'nama'      => $nama,
-                    'id_pegawai'      => $id_pegawai,
-                    'username'  => $username,
-                    'email'  => $email,
-                    'password'  => $password,
-                    'no_hp'     => $no_hp,
-                    'level'   => $level
-                ];
-                
-           
-                $this->model_pegawai->tambah_pegawai($data1);
+        $html =  $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+        
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        $this->dompdf->stream("Penetapan_Angka_Kredit_".$detail->nip.".pdf", array('Attachment ' => 0 ));
 
-                $this->model_user_login->tambah_user($data2, 'user');
-                $this->session->set_flashdata('message', 'Ditambahkan');
-                $this->session->set_flashdata('message', 'Ditambahkan');
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Akun Berhasil Di buat, Silahkan login.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>');
-                redirect('auth/login');
-            }
     }
 }

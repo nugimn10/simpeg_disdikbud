@@ -24,7 +24,6 @@
                 <span>Beranda</span></a>
         </li>
 
-
         <!-- Nav Item -->
         <li class="nav-item <?php echo $this->uri->segment(2) == 'profil_pegawai' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url('pegawai/profil_pegawai/detail/'); ?><?php echo $user['id_pegawai']; ?>">
@@ -33,10 +32,26 @@
         </li>
 
         <!-- Nav Item -->
-        <li class="nav-item <?php echo $this->uri->segment(2) == 'profil_pegawai' ? 'active' : null; ?>">
-            <a class="nav-link" href="<?php echo base_url('pegawai/profil_pegawai/detail/'); ?><?php echo $user['id_pegawai']; ?>">
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'izin' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url('pegawai/izin_pegawai/izin/'); ?><?php echo $user['id_pegawai']; ?>">
                 <i class="fas fa-fw fa-book"></i>
-                <span>Absensi</span></a>
+                <span>Izin</span></a>
+        </li>
+
+         <!-- Nav Item - Data Pegawai -->
+         <li class="nav-item <?php echo $this->uri->segment(2) == 'pak' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>pegawai/pak">
+                <i class="fas fa-fw fa-users"></i>
+                <span>PAK</span>
+            </a>
+        </li>
+
+         <!-- Nav Item - Data Pegawai -->
+         <li class="nav-item <?php echo $this->uri->segment(2) == 'kgb' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>pegawai//kenaikan_gaji">
+                <i class="fas fa-fw fa-users"></i>
+                <span>KGB</span>
+            </a>
         </li>
 
         <!-- Divider -->

@@ -109,6 +109,7 @@ class Profil_pegawai extends CI_Controller
         $path_to_file = base_url('/uploads/'.$kelengkapan_file->dokumen);
         
         if(!delete_files($path_to_file)) {
+            delete_files($path_to_file);
             $this->model_kelengkapan->hapus_kelengkapan($where, 'kelengkapan');
             
             echo JSON_encode('');;
@@ -131,7 +132,7 @@ class Profil_pegawai extends CI_Controller
                 'agama' => ['Islam', 'Katolik', 'Kristen Protestan', 'Hindu', 'Buddha', 'Kong Hu Cu'],
                 'gol_darah' => ['-', 'A', 'AB', 'B', 'O'],
                 'stts_pnkh' => ['Menikah', 'Belum Menikah', 'Cerai'],
-                'stts_kpgw' => ['PNS', 'Pegawai Swasta', 'Honorer']
+                'stts_kpgw' => ['PNS', 'PPPK', 'NON PNS']
             ];
 
             $this->load->view('templates/header', $data);

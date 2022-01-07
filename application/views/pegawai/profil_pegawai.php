@@ -20,9 +20,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="suami_istri-tab" data-toggle="tab" href="#suami_istri" role="tab" aria-controls="suami_istri" aria-selected="false">Suami/Istri</a>
                                 </li>
+                                <?php if ($detail->stts_knk_pkt == 0) { ?>
                                 <li class="nav-item">
-                                <a class="nav-item nav-link" id="kelengkapan-tab" data-toggle="tab" href="#kelengkapan" role="tab" aria-controls="kelengkapan" aria-selected="true">Kelengkapan</a>
+                                    <a class="nav-item nav-link" id="kelengkapan-tab" data-toggle="tab" href="#kelengkapan" role="tab" aria-controls="kelengkapan" aria-selected="true">Kelengkapan</a>
                                 </li>
+                                <?php }?>
+                                
                                 <!-- <li class="nav-item">
                                     <a class="nav-link" id="anak-tab" data-toggle="tab" href="#anak" role="tab" aria-controls="anak" aria-selected="false">Anak</a>
                                 </li>
@@ -33,6 +36,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="data_diri" role="tabpanel" aria-labelledby="data_diri-tab">
                                     <div class="card-body">
+                                        <P style="color:red;">*) pastikan anda sudah melengkapi data diri sebelum mengajukan kenaikan pangkat</p>
                                     <div class="col-md-10 text-left"><a href="<?php echo base_url('pegawai/profil_pegawai/edit/'. $detail->id_pegawai); ?>" class="btn btn-sm btn-primary"><i></i>Update</a></div>
                                    
                                     <div class="row justify-content-center">
@@ -76,7 +80,13 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Tahun Pensiun</th>
-                                                        <td>: </td>
+                                                        <?php if ($detail->tgl_lhr != null) {
+                                                            $t = strtotime($detail->tgl_lhr);
+                                                            $thn_pensiun = strtotime('+58 years', $t);?>
+                                                            <td>: <?php echo date('Y-m-d',$thn_pensiun) ?></td>
+                                                        <?php } else {?>
+                                                            <td>:</td>
+                                                            <?php }?>
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Agama</th>
@@ -110,6 +120,16 @@
                                                         <th class="text-right">Tanggal Kenaikan Gaji Berkala Terakhir</th>
                                                         <td>: <?php if ($detail->tgl_knk_gj == null) echo ""; else echo $detail->tgl_knk_gj ?></td>
                                                     </tr>
+                                                    <tr>
+                                                        <th class="text-right">Tanggal Kenaikan Gaji Berkala Berikutnya</th>
+                                                        <?php if ($detail->tgl_knk_gj != null) {
+                                                            $t = strtotime($detail->tgl_knk_gj);
+                                                            $tgk_knk_gj_berikut = strtotime('+2 years', $t);?>
+                                                            <td>: <?php echo date('Y-m-d',$tgk_knk_gj_berikut) ?></td>
+                                                        <?php } else {?>
+                                                            <td>:</td>
+                                                        <?php }?>
+                                                    </tr>
 
                                                 </table>
                                             </div>
@@ -140,21 +160,50 @@
                                                             <div class="row">
                                                                 <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>
                                                                 <div class="col-md-10 text-right">
-                                                                    <button type="button" class="btn">Belum Mengajukan</button>
-                                                                    <!-- <button type="button" class="btn btn-success">Disetujui</button>
-                                                                    <button type="button" class="btn btn-warning">Dalam Proses</button>
-                                                                    <button type="button" class="btn btn-danger">Ditolak</button> -->
+                                                                    <?php if ($detail->stts_knk_pkt == 0 ){?>
+                                                                        <button type="button" class="btn">Belum Mengajukan</button>
+                                                                        <?php } else if ( $detail->stts_knk_pkt == 1) {?>
+                                                                        <button type="button" class="btn btn-warning">Pemeriksaan Supervisor</button>
+                                                                        <?php } else if ( $detail->stts_knk_pkt == 2) {?>
+                                                                        <button type="button" class="btn btn-warning">Pemeriksaan Verifikator</button>
+                                                                        <?php } else if ( $detail->stts_knk_pkt == 3) {?>
+                                                                        <button type="button" class="btn btn-success">Dapat Dipertimbangkan</button>
+                                                                        <?php } else if ( $detail->stts_knk_pkt == 4){?>
+                                                                        <button type="button" class="btn btn-danger">Ditolak</button>
+                                                                        <?php } else if ( $detail->stts_knk_pkt == 5) {?>
+                                                                        <a class="btn btn-primary" href="<?php echo base_url('pegawai/kenaikan_pangkat/pak/'.$detail->id_pegawai); ?>">Unduh PAK</a>
+                                                                        <?php } ?>
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                        <li class="list-group-item">
-                                                            <div class="row">
-                                                            <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>
+                                                        <?php 
+                                                            $date1 = new DateTime($detail->tgl_knk_pkt);
+                                                            $date2 = new DateTime('now');
+                                                            $interval = $date1->diff($date2);
+                                                            //  echo "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days " . $interval->days . " days "; 
+                                                        ?>
                                                                 
-                                                                <div class="col-md-10 text-right"><a href="<?php echo base_url('pegawai/data_pegawai/ajukan'); ?>" class="btn btn-sm btn-primary"><i class="fas fa-sm fa-plus"></i> Ajukan Kenaikan Pangkat</a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                        <?php if ($interval->y > 3) {?> 
+                                                            <?php if ($detail->stts_knk_pkt == 0){?> 
+                                                                    <li class="list-group-item">
+                                                                        <div class="row">
+                                                                        <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>    
+                                                                        <div class="col-md-10 text-right"><button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_master_jabatan">Ajukan Kenaikan Pangkat</button>                                                           
+                                                                        </div>
+                                                                        </div>
+                                                                    </li>       
+                                                            <?php } else {?>
+                                                                    <?php echo ""?>        
+                                                            <?php }?>
+                                                        <?php } else {?>
+                                                                    <li class="list-group-item">
+                                                                        <div class="row">
+                                                                        <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>    
+                                                                        <div class="col-md-10 text-right"><a href="" class="btn btn-sm btn-primary"><i class="fas fa-sm "></i> Belum Bisa Mengajukan Kenaikan Pangkat</a>                                                           
+                                                                        </div>
+                                                                        </div>
+                                                                    </li>
+                                                        <?php }?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -205,7 +254,8 @@
                                 
                                 <div class="tab-pane fade" id="kelengkapan" role="tabpanel" aria-labelledby="kelengkapan-tab">
                                     <div class="card-body">
-                                        
+                                    <P style="color:red;">*) jika dokumen tidak berubah saat di upload silahkan silahkan bersihkan chached image and file terlebih dahulu
+                                    <br >*) bagi yang pertama kali mengajukan kenaikan pangkat SK_CPNS, SK_PNS, dan STTL_PRAJABATAN harus di isi </p>
                                     <div class="table-responsive">
                                             <table class="table table-bordered">
                                                 <thead>
@@ -214,6 +264,9 @@
                                                         <th>FILE</th>
                                                     </tr>
                                                 </thead>
+                                                <?php if ($detail->stts_knk_pkt){
+
+                                                }?>
                                                 <tbody>
                                                     <?php 
                                                     foreach ($berkas as $bks) : ?>
@@ -236,17 +289,22 @@
                                                                     $("#berkas<?php echo $klkn->berkas_id;?>").fileinput({ 
                                                                         uploadUrl: "<?php echo base_url('pegawai/profil_pegawai/upload_dokumen/'. $detail->id_pegawai.'/'.$bks->id_berkas); ?>",
                                                                         deleteUrl:"<?php echo base_url('pegawai/profil_pegawai/hapus_dokumen/'.$klkn->id_kelengkapan); ?>",
+                                                                        theme: 'explorer-fas',
                                                                         showCaption: false, 
                                                                         showRemove: false,
                                                                         showUpload: false,
+                                                                        showBrowse: true,
+                                                                        showDownload: true,
                                                                         maxFileCount: 1,
                                                                         dropZoneEnabled: false,
+                                                                        browseOnZoneClick: false,
+                                                                        preferIconicPreview: false,
                                                                         pdfRendererUrl: 'https://plugins.krajee.com/pdfjs/web/viewer.html',
-                                                                        overwriteInitial: false,
+                                                                        overwriteInitial: true,
                                                                         initialPreviewAsData: true,
                                                                         initialPreview: urlData,
                                                                         initialPreviewConfig: [
-                                                                            {type: 'pdf', description: "<h5>PDF File One</h5> This is a representative placeholder description number one for this PDF file.", size: 3072}
+                                                                            {type: 'pdf', description: "<h5>PDF File One</h5> This is a representative placeholder description number one for this PDF file.", width: "100px"}
                                                                         ]
                                                                     });});
 
@@ -259,16 +317,19 @@
                                                                      $(document).ready(function() {
                                                                         $("#berkas<?php echo $bks->id_berkas;?>").fileinput({ 
                                                                             uploadUrl: "<?php echo base_url('pegawai/profil_pegawai/upload_dokumen/'. $detail->id_pegawai.'/'.$bks->id_berkas); ?>",
-                                                                            deleteUrl:"",
+                                                                            deleteUrl:"",  
                                                                             showCaption: false, 
                                                                             showRemove: false,
+                                                                            showUpload: false,
+                                                                            showBrowse: true,
                                                                             dropZoneEnabled: false,
+                                                                            browseOnZoneClick: false,
                                                                             pdfRendererUrl: 'https://plugins.krajee.com/pdfjs/web/viewer.html',
-                                                                            overwriteInitial: false,
+                                                                            overwriteInitial: true,
                                                                             initialPreviewAsData: true,
                                                                             initialPreview: '',
                                                                             initialPreviewConfig: [
-                                                                                {type: 'pdf', description: "<h5>PDF File One</h5> This is a representative placeholder description number one for this PDF file.", size: 3072}
+                                                                                {type: 'pdf', description: "<h5>PDF File One</h5> This is a representative placeholder description number one for this PDF file."}
                                                                             ]
                                                                         });});
                                                                 </script>
@@ -306,8 +367,8 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID ESELON</th>
-                                                        <th>ID JABATAN</th>
+                                                        <th>JABATAN</th>
+                                                        <th>JENIS GURU</th>
                                                         <th>JENIS JABATAN</th>
                                                         <th>NO. SK</th>
                                                         <th>TANGGAL SK</th>
@@ -318,7 +379,7 @@
                                                 <tbody>
                                                     <?php foreach ($jabatan as $jbt) : ?>
                                                         <tr>
-                                                            <td><?php echo $jbt->id_master_eselon ?></td>
+                                                            <td><?php echo $jbt->nm_jabatan ?></td>
                                                             <td><?php echo $jbt->id_master_jabatan ?></td>
                                                             <td><?php echo $jbt->jenis_jbt ?></td>
                                                             <td><?php echo $jbt->no_sk_jbt ?></td>
@@ -339,7 +400,7 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID GOLONGAN</th>
+                                                        <th>GOLONGAN</th>
                                                         <th>PANGKAT</th>
                                                         <th>TMT PANGKAT</th>
                                                         <th>PEJABAT PENGESAH SK</th>
@@ -351,7 +412,7 @@
 
                                                     <?php foreach ($pangkat as $pkt) : ?>
                                                         <tr>
-                                                            <td><?php echo $pkt->id_master_golongan ?></td>
+                                                            <td><?php echo $pkt->golongan ?></td>
                                                             <td><?php echo $pkt->pangkat ?></td>
                                                             <td><?php echo $pkt->tmt_pkt ?></td>
                                                             <td><?php echo $pkt->pjb_pgs_pkt ?></td>
@@ -470,4 +531,47 @@
     </section>
 </div>
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="tambah_master_jabatan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">KONFIRMASI BERKAS YANG AKAN DIAJUKAN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <P style="color:red;">
+                *) berkas yang sudah diajukan tidak dapat di ubah
+                <br>
+            </p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama Berkas</th>
+                    </tr>
+                </thead>
+                
+                <tbody> 
+                <?php foreach ($kelengkapan as $klkn) : ?>
+                    <tr>
+                        <td>
+                        <?php echo $klkn->dokumen; ?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+                <form action="<?php echo base_url('pegawai/kenaikan_pangkat/ajukan/'.$detail->id_pegawai); ?>" method="post">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Ajukan</button>
+            </div>
+            </form>
+        </div>
+    </div>
 </div>

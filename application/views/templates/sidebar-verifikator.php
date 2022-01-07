@@ -34,7 +34,7 @@
         <li class="nav-item <?php echo $this->uri->segment(2) == 'data_pegawai' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>verifikator/data_pegawai">
                 <i class="fas fa-fw fa-users"></i>
-                <span>Data Pegawai</span>
+                <span>Kenaikan Pangkat</span>
             </a>
         </li>
         

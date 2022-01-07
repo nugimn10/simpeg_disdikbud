@@ -38,6 +38,9 @@ class Auth extends CI_Controller
                     case 'Verifikator':
                         redirect('verifikator/beranda');
                         break;
+                    case 'Supervisor':
+                        redirect('supervisor/beranda');
+                        break;
                     case 'Pegawai':
                         redirect('pegawai/beranda');
                         break;

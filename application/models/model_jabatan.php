@@ -9,6 +9,14 @@ class Model_jabatan extends CI_Model
 
     public function tampil_by_id_pegawai($id)
     {
+        $this->db->select('*');
+        $this->db->from('jabatan');
+        $this->db->join('master_jabatan','jabatan.id_master_jabatan=master_jabatan.id_master_jabatan');
+        $this->db->where(['jabatan.id_pegawai' => $id]);
+        $this->db->order_by('tgl_sk_jbt','desc');
+        $query = $this->db->get();
+        return $query->result();
+
         return $this->db->get_where('jabatan', ['id_pegawai' => $id])->result();
 
         // $this->db->select('master_eselon.eselon, master_jabatan.nm_jabatan, jabata
