@@ -38,21 +38,92 @@
                 <span>Izin</span></a>
         </li>
 
-         <!-- Nav Item - Data Pegawai -->
-         <li class="nav-item <?php echo $this->uri->segment(2) == 'pak' ? 'active' : null; ?>">
+         <!-- <li class="nav-item <?php echo $this->uri->segment(2) == 'pak' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>pegawai/pak">
                 <i class="fas fa-fw fa-users"></i>
                 <span>PAK</span>
             </a>
         </li>
 
-         <!-- Nav Item - Data Pegawai -->
          <li class="nav-item <?php echo $this->uri->segment(2) == 'kgb' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>pegawai//kenaikan_gaji">
                 <i class="fas fa-fw fa-users"></i>
                 <span>KGB</span>
             </a>
+        </li> -->
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item  <?php echo $this->uri->segment(2) == 'riwayat_keluarga' ? 'active' : null; ?>">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#keluarga" aria-expanded="true" aria-controls="keluarga">
+                <i class="fas fa-home fa-fw"></i>
+                <span>Riwayat Keluarga</span>
+            </a>
+            <div id="keluarga" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'data_suami_istri' ? 'active' : null; ?>" href="<?php echo base_url('pegawai/riwayat_keluarga/data_suami_istri/index/'); ?><?php echo $user['id_pegawai']; ?>">
+                        <i class="fas fa-user fa-fw"></i>
+                        <span>Suami/Istri</span>
+                    </a>
+                    <!-- <a class="collapse-item <?php echo $this->uri->segment(3) == 'data_anak' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_keluarga/data_anak">
+                        <i class="fas fa-user fa-fw"></i>
+                        <span>Anak</span>
+                    </a>
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'data_orangtua' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_keluarga/data_orangtua">
+                        <i class="fas fa-user fa-fw"></i>
+                        <span>Orang Tua</span>
+                    </a> -->
+                </div>
+            </div>
         </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item  <?php echo $this->uri->segment(2) == 'riwayat_pendidikan' ? 'active' : null; ?>">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#pendidikan" aria-expanded="true" aria-controls="pendidikan">
+                <i class="fas fa-university fa-fw"></i>
+                <span>Riwayat Pendidikan Terakhir</span>
+            </a>
+            <div id="pendidikan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'sekolah' ? 'active' : null; ?>" href="<?php echo base_url('pegawai/riwayat_pendidikan/sekolah/index/'); ?><?php echo $user['id_pegawai']; ?>">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Sekolah</span>
+                    </a>
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'kelengkapan' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_pendidikan/kelengkapan">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Kelengkapan</span>
+                    </a>
+                    <!-- <a class="collapse-item <?php echo $this->uri->segment(3) == 'bahasa' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_pendidikan/bahasa">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Bahasa</span>
+                    </a> -->
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'kepegawaian' ? 'active' : null; ?>">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#kepegawaian" aria-expanded="true" aria-controls="kepegawaian">
+                <i class="fas fa-fw fa-briefcase"></i>
+                <span>Kepegawaian</span>
+            </a>
+            <div id="kepegawaian" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'jabatan' ? 'active' : null; ?>" href="<?php echo base_url('pegawai/kepegawaian/jabatan/index/'); ?><?php echo $user['id_pegawai']; ?>">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Jabatan</span>
+                    </a>
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'pangkat' ? 'active' : null; ?>" href="<?php echo base_url('pegawai/kepegawaian/pangkat/index/'); ?><?php echo $user['id_pegawai'];?> ">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Pangkat</span>
+                    </a>
+                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'pangkat' ? 'active' : null; ?>" href="<?php echo base_url('pegawai/kepegawaian/mutasi/index/'); ?><?php echo $user['id_pegawai'];?> ">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Mutasi</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

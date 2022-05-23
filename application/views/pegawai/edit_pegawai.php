@@ -111,6 +111,17 @@
 
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
+                        <div class="col-md-2 col-sm-2 col-xs-2 text-right mt-2">
+                            <label for="nip">No. Seri Karpeg</label>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+                            <input type="text" name="nokarpeg" id="nokarpeg" class="form-control" placeholder="Masukkan No Seri Karpeg" value="<?php echo $pegawai->nokarpeg ?>">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
                             <label for="tpt_lhr">Tempat Tanggal Lahir</label>
                         </div>

@@ -57,6 +57,76 @@ class Kenaikan_pangkat extends CI_Controller
         redirect('pegawai/profil_pegawai/detail/'.$id);
     }
 
+    public function tms($id)
+    {
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
+
+        $data = [
+            'nip'        => $pegawai->nip,
+            'nik'        => $pegawai->nik,
+            'nuptk'      => $pegawai->nuptk,
+            'nm_pegawai' => $pegawai->nm_pegawai,
+            'jk'         => $pegawai->jk,
+            'uk'         => $pegawai->uk,
+            'noserdik'   => $pegawai->noserdik,
+            'kec'        => $pegawai->kec,
+            'tpt_lhr'    => $pegawai->tpt_lhr,
+            'tgl_lhr'    => $pegawai->tgl_lhr,
+            'agama'      => $pegawai->agama,
+            'gol_darah'   => $pegawai->gol_darah,
+            'stts_pnkh'   => $pegawai->stts_pnkh,
+            'stts_kpgw'   => $pegawai->stts_kpgw,
+            'no_hp'      => $pegawai->no_hp,
+            'email'      => $pegawai->email,
+            'alamat'     => $pegawai->alamat,
+            'tgl_msk'    => $pegawai->tgl_msk,
+            'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+            'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+            'status' => $pegawai->status,
+            'stts_knk_pkt' => "0"
+        ];
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data);
+        $this->session->set_flashdata('message', 'Diubah');
+        redirect('pegawai/profil_pegawai/detail/'.$id);
+    }
+
+    public function btl($id)
+    {
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
+
+        $data = [
+            'nip'        => $pegawai->nip,
+            'nik'        => $pegawai->nik,
+            'nuptk'      => $pegawai->nuptk,
+            'nm_pegawai' => $pegawai->nm_pegawai,
+            'jk'         => $pegawai->jk,
+            'uk'         => $pegawai->uk,
+            'noserdik'   => $pegawai->noserdik,
+            'kec'        => $pegawai->kec,
+            'tpt_lhr'    => $pegawai->tpt_lhr,
+            'tgl_lhr'    => $pegawai->tgl_lhr,
+            'agama'      => $pegawai->agama,
+            'gol_darah'   => $pegawai->gol_darah,
+            'stts_pnkh'   => $pegawai->stts_pnkh,
+            'stts_kpgw'   => $pegawai->stts_kpgw,
+            'no_hp'      => $pegawai->no_hp,
+            'email'      => $pegawai->email,
+            'alamat'     => $pegawai->alamat,
+            'tgl_msk'    => $pegawai->tgl_msk,
+            'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+            'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+            'status' => $pegawai->status,
+            'stts_knk_pkt' => "0"
+        ];
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data);
+        $this->session->set_flashdata('message', 'Diubah');
+        redirect('pegawai/profil_pegawai/detail/'.$id);
+    }
+
     public function pak($id){
         $this->load->library('dompdf_gen');
 
@@ -87,9 +157,41 @@ class Kenaikan_pangkat extends CI_Controller
         $html =  $this->output->get_output();
         $this->dompdf->set_paper($paper_size, $orientation);
         
+        
         $this->dompdf->load_html($html);
         $this->dompdf->render();
         $this->dompdf->stream("Penetapan_Angka_Kredit_".$detail->nip.".pdf", array('Attachment ' => 0 ));
+
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
+
+        $data = [
+            'nip'        => $pegawai->nip,
+            'nik'        => $pegawai->nik,
+            'nuptk'      => $pegawai->nuptk,
+            'nm_pegawai' => $pegawai->nm_pegawai,
+            'jk'         => $pegawai->jk,
+            'uk'         => $pegawai->uk,
+            'noserdik'   => $pegawai->noserdik,
+            'kec'        => $pegawai->kec,
+            'tpt_lhr'    => $pegawai->tpt_lhr,
+            'tgl_lhr'    => $pegawai->tgl_lhr,
+            'agama'      => $pegawai->agama,
+            'gol_darah'   => $pegawai->gol_darah,
+            'stts_pnkh'   => $pegawai->stts_pnkh,
+            'stts_kpgw'   => $pegawai->stts_kpgw,
+            'no_hp'      => $pegawai->no_hp,
+            'email'      => $pegawai->email,
+            'alamat'     => $pegawai->alamat,
+            'tgl_msk'    => $pegawai->tgl_msk,
+            'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+            'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+            'status' => $pegawai->status,
+            'stts_knk_pkt' => "0"
+        ];
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data);
+        redirect('pegawai/profil_pegawai/detail/'.$id);
 
     }
 }

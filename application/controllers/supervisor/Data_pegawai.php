@@ -121,7 +121,7 @@ class Data_pegawai extends CI_Controller
                 'agama' => ['Islam', 'Katolik', 'Kristen Protestan', 'Hindu', 'Buddha', 'Kong Hu Cu'],
                 'gol_darah' => ['-', 'A', 'AB', 'B', 'O'],
                 'stts_pnkh' => ['Menikah', 'Belum Menikah', 'Cerai'],
-                'stts_kpgw' => ['PNS', 'Pegawai Swasta', 'Honorer']
+                'stts_kpgw' => ['PNS', 'NON PNS', 'PPPK']
             ];
 
             $this->load->view('templates/header', $data);

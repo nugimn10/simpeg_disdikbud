@@ -118,6 +118,22 @@
             </a>
         </li>
 
+        
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'waktu_usulan' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>admin/waktu_usulan">
+                <i class="fas fa-lock"></i>
+                <span>Waktu Usulan</span>
+            </a>
+        </li>
+        
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'cetak_pak' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>admin/cetak_pak">
+                <i class="fas fa-lock"></i>
+                <span>Cetak PAK</span>
+            </a>
+        </li>
+
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block mt-3">
 

@@ -155,11 +155,11 @@
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akl<?php echo $angka->id_ak;?>" name="akl<?php echo $angka->id_ak;?>" type="number"  value=""></input> 
+                                                                <input id="akl<?php echo $angka->id_ak;?>" name="akl<?php echo $angka->id_ak;?>" type="number" value="" step="any"></input> 
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akb<?php echo $angka->id_ak;?>" name="akb<?php echo $angka->id_ak;?>" type="number"  value=""></input> 
+                                                                <input id="akb<?php echo $angka->id_ak;?>" name="akb<?php echo $angka->id_ak;?>" type="number" value="" step="any"></input> 
                                                             </td>
                                                             
                                                         </tr>
@@ -173,11 +173,11 @@
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akl<?php echo $angka->id_pak;?>" name="akl<?php echo $angka->id_pak;?>" type="number" disabled value="<?php echo $angka->angka_lama != null ? $angka->angka_lama : '0'; ?>"></input> 
+                                                                <input id="akl<?php echo $angka->id_pak;?>" name="akl<?php echo $angka->id_pak;?>" type="number" value="<?php echo $angka->angka_lama != null ? $angka->angka_lama : '0'; ?>" step="any" ></input> 
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>"></input> 
+                                                                <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>" step="any"></input> 
                                                             </td>
                                                             
                                                         </tr>
@@ -185,16 +185,28 @@
                                                     <?php }?>
                                                 </tbody>
                                             </table>
-
-                                                    <p align="center"> <?php if ($detail->stts_knk_pkt < 3 && $detail->stts_knk_pkt >= 1 ){?><a href="" class="btn btn-danger">Tolak</a>     <button type="submit" class="btn btn-primary">Lanjutkan Ke Verifikator</button> <?php } ?> 
+                                                                 
+                                            <!--Material textarea-->
+                                            
+                                            <?php echo form_open_multipart('supervisor/kenaikan_pangkat/');?>
+                                            <div class="md-form">
+                                                <p>Catatan Untuk Pegawai :</p>
+                                                <textarea name="notes" class="md-textarea form-control" rows="4" cols=100%></textarea>
+                                            </div>
+                                                    <p align="center"> <br> <?php if ($detail->stts_knk_pkt < 3 && $detail->stts_knk_pkt >= 1 ){?>
+                                                        <!-- <a href="<?php echo base_url('supervisor/kenaikan_pangkat/tolak/'. $detail->id_pegawai); ?>" class="btn btn-danger">TMS</a> 
+                                                        <a href="<?php echo base_url('supervisor/kenaikan_pangkat/btl/'. $detail->id_pegawai); ?>" class="btn btn-warning">BTL</a>      -->
+                                                        
+                                                        
+                                                        <button type="submit" class="btn btn-warning" name="btl" value="y">BTL</button>
+                                                        <button type="submit" class="btn btn-danger" name="tms" value="y">TMS</button>
+                                                        <button type="submit" class="btn btn-primary" name="teruskan" value="y">Lanjutkan Ke Verifikator</button> <?php } ?>         
+                                            
                                                     <?php if ($detail->stts_knk_pkt == 3 ){?>
                                                         <a href="" class="btn btn-success"  data-toggle="modal" data-target="#buat_nomor_surat">Selesai</a>      
-                                                    <?php } ?></p>       
-                                                    <p align="center"></p>       
-                                                    
+                                                    <?php } ?></p> 
                                             <?php echo form_close();?>
-                                            </div>
-
+                                            </div>                                     
                                         </div>
                                     </div>
                                 </div>

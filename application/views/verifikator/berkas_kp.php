@@ -154,11 +154,11 @@
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('verifikator/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akl<?php echo $angka->id_pak;?>" name="akl<?php echo $angka->id_pak;?>" type="number" value="<?php echo $angka->angka_lama != null ? $angka->angka_lama : '0'; ?>"></input> 
+                                                                <input id="akl<?php echo $angka->id_pak;?>" name="akl<?php echo $angka->id_pak;?>" type="number" value="<?php echo $angka->angka_lama != null ? $angka->angka_lama : '0'; ?>" step=any></input> 
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('verifikator/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>"></input> 
+                                                                <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>" step=any></input> 
                                                             </td>
                                                             
                                                         </tr>

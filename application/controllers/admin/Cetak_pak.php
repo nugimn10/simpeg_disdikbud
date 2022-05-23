@@ -97,7 +97,7 @@ class Cetak_pak extends CI_Controller
         
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data);
-        redirect('pegawai/profil_pegawai/detail/'.$id);
+        redirect('admin/cetak_pak/');
     }
     
 }

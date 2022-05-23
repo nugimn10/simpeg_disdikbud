@@ -56,34 +56,170 @@ class Kenaikan_pangkat extends CI_Controller
     public function teruskan($id)
     {
         $kelengkapan = $this->db->get_where('kelengkapan', ['pegawai_id' => $id])->result_array();
+            $angkakredit = $this->model_ak->tampil_semua();
+            
+            $akReady = $this->db->get_where('pak', ['pegawai_id' => $id])->result_array();;
+
+            // var_dump($akReady);
+            $pegawai = $this->model_pegawai->tampil_by_id($id);
+            
+            if ($akReady != null) {
+                for ($i=0; $i < count($akReady) ; $i++) { 
+                    if ($this->input->post("akb".$akReady[$i]['id_pak']) != '') {
+                        $bulkpak [] = array(
+                            'id_pak' => $akReady[$i]['id_pak'],
+                            'pegawai_id' => $akReady[$i]['pegawai_id'],
+                            'unsur' => $this->input->post("unsur".$akReady[$i]['id_pak']),
+                            'angka_lama' =>$this->input->post("akl".$akReady[$i]['id_pak']),
+                            'angka_baru' => $this->input->post("akb".$akReady[$i]['id_pak']),
+                        );
+                        
+                    }
+                }
+
+                $linksCount = count($bulkpak);
+                if($linksCount) {
+                    // $this->db->where('id_kelengkapan', $kelengkapan['id_kelengkapan']);
+                    $this->db->update_batch('pak', $bulkpak, 'id_pak');
+                }   
+        
+            } else {
+                for ($i=0; $i < count($angkakredit) ; $i++) { 
+                    $bulkpak[] = array(
+                        'pegawai_id' => $pegawai->id_pegawai,
+                        'unsur' =>  $this->input->post("unsur".$angkakredit[$i]->id_ak),
+                        'angka_lama' => $this->input->post("akl".$angkakredit[$i]->id_ak),
+                        'angka_baru' => $this->input->post("akb".$angkakredit[$i]->id_ak),
+                    );
+            }
+                $this->db->insert_batch('pak', $bulkpak);   
+
+        }
+
+        
+        $catatan = $this->input->post('notes');
+
+        if ($this->input->post('teruskan') == 'y')
+        {
+
+            $data1 = [
+                'nip'        => $pegawai->nip,
+                'nik'        => $pegawai->nik,
+                'nuptk'      => $pegawai->nuptk,
+                'nm_pegawai' => $pegawai->nm_pegawai,
+                'jk'         => $pegawai->jk,
+                'uk'         => $pegawai->uk,
+                'noserdik'   => $pegawai->noserdik,
+                'kec'        => $pegawai->kec,
+                'tpt_lhr'    => $pegawai->tpt_lhr,
+                'tgl_lhr'    => $pegawai->tgl_lhr,
+                'agama'      => $pegawai->agama,
+                'gol_darah'   => $pegawai->gol_darah,
+                'stts_pnkh'   => $pegawai->stts_pnkh,
+                'stts_kpgw'   => $pegawai->stts_kpgw,
+                'no_hp'      => $pegawai->no_hp,
+                'email'      => $pegawai->email,
+                'alamat'     => $pegawai->alamat,
+                'tgl_msk'    => $pegawai->tgl_msk,
+                'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+                'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+                'status' => $pegawai->status,
+                'stts_knk_pkt' => "2",
+                'catatan' => $catatan
+            ];
+            
+            $this->db->where('id_pegawai', $id);
+            $this->db->update('pegawai', $data1);
+            
+            
+            $this->session->set_flashdata('message', 'dikirim ke Verifikator');
+            redirect('supervisor/kenaikan_pangkat/');
+        }
+
+        else if ($this->input->post('btl') == 'y')
+        {
+            $data1 = [
+                'nip'        => $pegawai->nip,
+                'nik'        => $pegawai->nik,
+                'nuptk'      => $pegawai->nuptk,
+                'nm_pegawai' => $pegawai->nm_pegawai,
+                'jk'         => $pegawai->jk,
+                'uk'         => $pegawai->uk,
+                'noserdik'   => $pegawai->noserdik,
+                'kec'        => $pegawai->kec,
+                'tpt_lhr'    => $pegawai->tpt_lhr,
+                'tgl_lhr'    => $pegawai->tgl_lhr,
+                'agama'      => $pegawai->agama,
+                'gol_darah'   => $pegawai->gol_darah,
+                'stts_pnkh'   => $pegawai->stts_pnkh,
+                'stts_kpgw'   => $pegawai->stts_kpgw,
+                'no_hp'      => $pegawai->no_hp,
+                'email'      => $pegawai->email,
+                'alamat'     => $pegawai->alamat,
+                'tgl_msk'    => $pegawai->tgl_msk,
+                'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+                'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+                'status' => $pegawai->status,
+                'stts_knk_pkt' => "4",
+                'catatan' => $catatan
+            ];
+            
+            $this->db->where('id_pegawai', $id);
+            $this->db->update('pegawai', $data1);
+            
+            
+            $this->session->set_flashdata('message', 'dikirim ke pegawai untuk di perbaiki');
+        }
+
+        else
+        {
+            $data1 = [
+                'nip'        => $pegawai->nip,
+                'nik'        => $pegawai->nik,
+                'nuptk'      => $pegawai->nuptk,
+                'nm_pegawai' => $pegawai->nm_pegawai,
+                'jk'         => $pegawai->jk,
+                'uk'         => $pegawai->uk,
+                'noserdik'   => $pegawai->noserdik,
+                'kec'        => $pegawai->kec,
+                'tpt_lhr'    => $pegawai->tpt_lhr,
+                'tgl_lhr'    => $pegawai->tgl_lhr,
+                'agama'      => $pegawai->agama,
+                'gol_darah'   => $pegawai->gol_darah,
+                'stts_pnkh'   => $pegawai->stts_pnkh,
+                'stts_kpgw'   => $pegawai->stts_kpgw,
+                'no_hp'      => $pegawai->no_hp,
+                'email'      => $pegawai->email,
+                'alamat'     => $pegawai->alamat,
+                'tgl_msk'    => $pegawai->tgl_msk,
+                'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+                'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+                'status' => $pegawai->status,
+                'stts_knk_pkt' => "9",
+                'catatan' => $catatan
+            ];
+            
+            $this->db->where('id_pegawai', $id);
+            $this->db->update('pegawai', $data1);
+            
+            
+            $this->session->set_flashdata('message', 'dikirim ke pegawai untuk di perbaiki');
+        }
+
+        
+        redirect('supervisor/kenaikan_pangkat/');
+
+        
+    }
+    
+    public function tolak($id)
+    {
+        $kelengkapan = $this->db->get_where('kelengkapan', ['pegawai_id' => $id])->result_array();
         $angkakredit = $this->model_ak->tampil_semua();
         
         $akReady = $this->db->get_where('pak', ['pegawai_id' => $id])->result_array();;
 
-        // var_dump($akReady);
         $pegawai = $this->model_pegawai->tampil_by_id($id);
-
-        // $data [] = array();
-        // for ($i=0; $i < count($kelengkapan) ; $i++) { 
-        //     if ($this->input->post($kelengkapan[$i]['id_kelengkapan']) != '') {
-        //         $data [] = array(
-        //             'id_kelengkapan' => $kelengkapan[$i]['id_kelengkapan'],
-        //             'berkas_id' => $kelengkapan[$i]['berkas_id'],
-        //             'nd' => $kelengkapan[$i]['nd'],
-        //             'dokumen' =>$kelengkapan[$i]['dokumen'],
-        //             'nilai' => $this->input->post($kelengkapan[$i]['id_kelengkapan']),
-        //             'pegawai_id' => $kelengkapan[$i]['pegawai_id'],
-        //             'status' => "2",
-        //         );
-        //     }
-        // }
-
-        // $linksCount = count($data);
-        // // print_r($data);
-        // if($linksCount) {
-        //     // $this->db->where('id_kelengkapan', $kelengkapan['id_kelengkapan']);
-        //     $this->db->update_batch('kelengkapan', $data, 'id_kelengkapan');
-        // }
         
         if ($akReady != null) {
             for ($i=0; $i < count($akReady) ; $i++) { 
@@ -119,6 +255,8 @@ class Kenaikan_pangkat extends CI_Controller
     }
 
 
+        $catatan = $this->input->post('notes');
+
         $data1 = [
             'nip'        => $pegawai->nip,
             'nik'        => $pegawai->nik,
@@ -141,14 +279,96 @@ class Kenaikan_pangkat extends CI_Controller
             'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
             'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
             'status' => $pegawai->status,
-            'stts_knk_pkt' => "2"
+            'stts_knk_pkt' => "9",
+            'catatan' => $catatan
         ];
         
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data1);
         
         
-        $this->session->set_flashdata('message', 'dikirim ke Verifikator');
+        $this->session->set_flashdata('message', 'dikirim ke pegawai untuk di perbaiki');
+        redirect('supervisor/kenaikan_pangkat/');
+    }
+
+    public function btl($id)
+    {
+        $kelengkapan = $this->db->get_where('kelengkapan', ['pegawai_id' => $id])->result_array();
+        $angkakredit = $this->model_ak->tampil_semua();
+        
+        $akReady = $this->db->get_where('pak', ['pegawai_id' => $id])->result_array();;
+
+        // var_dump($akReady);
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
+
+        
+    //     if ($akReady != null) {
+    //         for ($i=0; $i < count($akReady) ; $i++) { 
+    //             if ($this->input->post("akb".$akReady[$i]['id_pak']) != '') {
+    //                 $bulkpak [] = array(
+    //                     'id_pak' => $akReady[$i]['id_pak'],
+    //                     'pegawai_id' => $akReady[$i]['pegawai_id'],
+    //                     'unsur' => $this->input->post("unsur".$akReady[$i]['id_pak']),
+    //                     'angka_lama' =>$this->input->post("akl".$akReady[$i]['id_pak']),
+    //                     'angka_baru' => $this->input->post("akb".$akReady[$i]['id_pak']),
+    //                 );
+                    
+    //             }
+    //         }
+
+    //         $linksCount = count($bulkpak);
+    //         if($linksCount) {
+    //             // $this->db->where('id_kelengkapan', $kelengkapan['id_kelengkapan']);
+    //             $this->db->update_batch('pak', $bulkpak, 'id_pak');
+    //         }   
+    
+    //     } else {
+    //         for ($i=0; $i < count($angkakredit) ; $i++) { 
+    //             $bulkpak[] = array(
+    //                 'pegawai_id' => $pegawai->id_pegawai,
+    //                 'unsur' =>  $this->input->post("unsur".$angkakredit[$i]->id_ak),
+    //                 'angka_lama' => $this->input->post("akl".$angkakredit[$i]->id_ak),
+    //                 'angka_baru' => $this->input->post("akb".$angkakredit[$i]->id_ak),
+    //             );
+    //     }
+    //         $this->db->insert_batch('pak', $bulkpak);   
+
+    // }
+        
+        $catatan = $this->input->post('notes');
+
+        echo $catatan;
+        $data1 = [
+            'nip'        => $pegawai->nip,
+            'nik'        => $pegawai->nik,
+            'nuptk'      => $pegawai->nuptk,
+            'nm_pegawai' => $pegawai->nm_pegawai,
+            'jk'         => $pegawai->jk,
+            'uk'         => $pegawai->uk,
+            'noserdik'   => $pegawai->noserdik,
+            'kec'        => $pegawai->kec,
+            'tpt_lhr'    => $pegawai->tpt_lhr,
+            'tgl_lhr'    => $pegawai->tgl_lhr,
+            'agama'      => $pegawai->agama,
+            'gol_darah'   => $pegawai->gol_darah,
+            'stts_pnkh'   => $pegawai->stts_pnkh,
+            'stts_kpgw'   => $pegawai->stts_kpgw,
+            'no_hp'      => $pegawai->no_hp,
+            'email'      => $pegawai->email,
+            'alamat'     => $pegawai->alamat,
+            'tgl_msk'    => $pegawai->tgl_msk,
+            'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+            'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+            'status' => $pegawai->status,
+            'stts_knk_pkt' => "4",
+            'catatan' => $catatan
+        ];
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data1);
+        
+        
+        $this->session->set_flashdata('message', 'dikirim ke pegawai untuk di perbaiki');
         redirect('supervisor/kenaikan_pangkat/');
     }
 

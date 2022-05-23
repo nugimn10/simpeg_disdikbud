@@ -204,7 +204,8 @@
                             <select name="stts_kpgw" class="custom-select">
                                 <option selected>Pilih Status Kepegawaian</option>
                                 <option>PNS</option>
-                                <option>Honorer</option>
+                                <option>NON PNS</option>
+                                <option>PPPK</option>
                             </select>
                         </div>
                     </div>

@@ -43,15 +43,19 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Unit Kerja</th>
-                                                        <td>: <?php echo "" ?></td>
+                                                        <td>: <?php echo  $detail->uk ?></td>
                                                     </tr>                                                    
                                                     <tr>
                                                         <th class="text-right">Kecamatan</th>
-                                                        <td>: <?php echo "" ?></td>
+                                                        <td>: <?php echo  $detail->kec ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">No Sertifikat Pendidik</th>
-                                                        <td>: <?php echo "" ?></td>
+                                                        <td>: <?php echo  $detail->noserdik ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="text-right">No Seri Karpeg</th>
+                                                        <td>: <?php echo  $detail->nokarpeg ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">NIP</th>

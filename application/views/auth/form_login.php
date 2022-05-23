@@ -23,7 +23,8 @@
                             </div>
                             <div class="flex-sb-m w-full p-b-30">
                                 <div class="contact100-form-checkbox"> <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"> <label class="label-checkbox100" for="ckb1"> Ingat Saya</label> </div>
-                                <div> <a href="<?php echo base_url('auth/cari'); ?>" class="txt1"> Belum Punya Akun? </a> </div>
+                                <div> <a href="<?php echo base_url('auth/cari'); ?>" class="txt1"> Belum Punya Akun? 
+                            </a> </div>
                             </div>
                             <div class="container-login100-form-btn p-t-25"> <button type="submit" class="btn btn-primary btn-user btn-block">Login</button></div>
                         </form>
@@ -34,6 +35,11 @@
     </div>
 </div>
 <style>
+    <?php 
+    $a = 5;
+    $b = 5;
+    echo ($a === $b);
+    ?>
 
 * {
     margin: 0px;

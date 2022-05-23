@@ -36,7 +36,18 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="data_diri" role="tabpanel" aria-labelledby="data_diri-tab">
                                     <div class="card-body">
-                                        <P style="color:red;">*) pastikan anda sudah melengkapi data diri sebelum mengajukan kenaikan pangkat</p>
+                                    <P style="color:red;">*) pastikan anda sudah melengkapi data diri sebelum mengajukan kenaikan pangkat</p>
+                                    <?php $current = date("Y-m-d"); ?>
+                                    <?php foreach ($berkas as $mb) : ?>
+                                        <?php if ($mb->id_berkas == 1 && $mb->tgl_mulai <= $current &&  $mb->tgl_selesai >= $current) {?> 
+                                            <P style="color:red;">*) Masa pengajuan kenaikan pangkat dari tanggal <?php echo date("d/m/Y", strtotime($mb->tgl_mulai) ) ?> s/d <?php echo date("d/m/Y", strtotime($mb->tgl_selesai))?> </p>
+                                            <?php break ?>
+                                            <?php } else {?>
+                                            <P style="color:red;">*) Masa pengajuan kenaikan pangkat telah berakhir per tanggal <?php echo date("d/m/Y", strtotime($mb->tgl_selesai) ); ?> </p>
+                                            <?php break ?>    
+                                        <?php }?>
+                                        
+                                    <?php endforeach;?>
                                     <div class="col-md-10 text-left"><a href="<?php echo base_url('pegawai/profil_pegawai/edit/'. $detail->id_pegawai); ?>" class="btn btn-sm btn-primary"><i></i>Update</a></div>
                                    
                                     <div class="row justify-content-center">
@@ -62,6 +73,11 @@
                                                         <th class="text-right">No Sertifikat Pendidik</th>
                                                         <td>: <?php echo $detail->noserdik ?></td>
                                                     </tr>
+                                                    
+                                                    <tr>
+                                                        <th class="text-right">No Seri Karpeg</th>
+                                                        <td>: <?php echo $detail->nokarpeg ?></td>                                                        
+                                                    </tr>
                                                     <tr>
                                                         <th class="text-right">NIP</th>
                                                         <td>: <?php echo $detail->nip ?></td>
@@ -76,9 +92,13 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Tempat, Tanggal Lahir</th>
-                                                        <td>: <?php if ($detail->tpt_lhr == null) echo ""; else  echo $detail->tpt_lhr ?>, <?php if ($detail->tgl_lhr == null) echo ""; else echo $detail->tgl_lhr ?></td>
+                                                        <td>: <?php
+                                                        $timestamp = strtotime($detail->tgl_lhr);
+                                                        $new_date = date("m-d-Y", $timestamp);
+
+                                                         if ($detail->tpt_lhr == null) echo ""; else  echo $detail->tpt_lhr ?>, <?php if ($detail->tgl_lhr == null) echo ""; else echo $new_date ?></td>
                                                     </tr>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <th class="text-right">Tahun Pensiun</th>
                                                         <?php if ($detail->tgl_lhr != null) {
                                                             $t = strtotime($detail->tgl_lhr);
@@ -87,7 +107,7 @@
                                                         <?php } else {?>
                                                             <td>:</td>
                                                             <?php }?>
-                                                    </tr>
+                                                    </tr> -->
                                                     <tr>
                                                         <th class="text-right">Agama</th>
                                                         <td>: <?php if ($detail->agama == null) echo ""; else echo $detail->agama ?></td>
@@ -110,22 +130,32 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Tanggal Masuk</th>
-                                                        <td>: <?php if ($detail->tgl_msk == null) echo ""; else echo $detail->tgl_msk ?></td>
+                                                        <td>: <?php
+                                                        $timestamp = strtotime($detail->tgl_msk);
+                                                        $new_date = date("m-d-Y", $timestamp);
+                                                        if ($detail->tgl_msk == null) echo ""; else echo $new_date ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Tanggal Kenaikan Pangkat</th>
-                                                        <td>: <?php if ($detail->tgl_knk_pkt == null) echo ""; else echo $detail->tgl_knk_pkt ?></td>
+                                                        <td>: <?php 
+                                                        $timestamp = strtotime($detail->tgl_knk_pkt);
+                                                        $new_date = date("m-d-Y", $timestamp);
+                                                        if ($detail->tgl_knk_pkt == null) echo ""; else echo $new_date ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Tanggal Kenaikan Gaji Berkala Terakhir</th>
-                                                        <td>: <?php if ($detail->tgl_knk_gj == null) echo ""; else echo $detail->tgl_knk_gj ?></td>
+                                                        <td>: <?php 
+                                                        $timestamp = strtotime($detail->tgl_knk_gj);
+                                                        $new_date = date("m-d-Y", $timestamp);
+
+                                                        if ($detail->tgl_knk_gj == null) echo ""; else echo $new_date ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th class="text-right">Tanggal Kenaikan Gaji Berkala Berikutnya</th>
                                                         <?php if ($detail->tgl_knk_gj != null) {
                                                             $t = strtotime($detail->tgl_knk_gj);
                                                             $tgk_knk_gj_berikut = strtotime('+2 years', $t);?>
-                                                            <td>: <?php echo date('Y-m-d',$tgk_knk_gj_berikut) ?></td>
+                                                            <td>: <?php echo date('m-d-Y',$tgk_knk_gj_berikut) ?></td>
                                                         <?php } else {?>
                                                             <td>:</td>
                                                         <?php }?>
@@ -168,8 +198,12 @@
                                                                         <button type="button" class="btn btn-warning">Pemeriksaan Verifikator</button>
                                                                         <?php } else if ( $detail->stts_knk_pkt == 3) {?>
                                                                         <button type="button" class="btn btn-success">Dapat Dipertimbangkan</button>
+                                                                        <?php } else if ( $detail->stts_knk_pkt == 9){?>
+                                                                        <a class="btn btn-danger" href="<?php echo base_url('pegawai/kenaikan_pangkat/tms/'.$detail->id_pegawai); ?>">Tidak Memenuhi Syarat</a><br><p></p>
+                                                                        <textarea id="catatan" name="catatan" row="5" col="100%" class="md-textarea form-control"  style="background-color:green;color:#fff;" disabled><?php echo $detail->catatan; ?></textarea>
                                                                         <?php } else if ( $detail->stts_knk_pkt == 4){?>
-                                                                        <button type="button" class="btn btn-danger">Ditolak</button>
+                                                                        <a class="btn btn-warning" href="<?php echo base_url('pegawai/kenaikan_pangkat/btl/'.$detail->id_pegawai); ?>">Berkas Tidak Lengkap</a><br><p></p>
+                                                                        <textarea id="catatan" name="catatan" row="5" col="100%" class="md-textarea form-control"  style="background-color:green;color:#fff;" disabled><?php echo $detail->catatan; ?></textarea>
                                                                         <?php } else if ( $detail->stts_knk_pkt == 5) {?>
                                                                         <a class="btn btn-primary" href="<?php echo base_url('pegawai/kenaikan_pangkat/pak/'.$detail->id_pegawai); ?>">Unduh PAK</a>
                                                                         <?php } ?>
@@ -182,8 +216,8 @@
                                                             $interval = $date1->diff($date2);
                                                             //  echo "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days " . $interval->days . " days "; 
                                                         ?>
-                                                                
-                                                        <?php if ($interval->y > 3) {?> 
+                                                        <?php foreach ($berkas as $mb) : ?>
+                                                        <?php if ($interval->y >= 3 && $mb->id_berkas == 1 && $mb->tgl_mulai <= $current &&  $mb->tgl_selesai >= $current) {?> 
                                                             <?php if ($detail->stts_knk_pkt == 0){?> 
                                                                     <li class="list-group-item">
                                                                         <div class="row">
@@ -191,19 +225,28 @@
                                                                         <div class="col-md-10 text-right"><button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_master_jabatan">Ajukan Kenaikan Pangkat</button>                                                           
                                                                         </div>
                                                                         </div>
-                                                                    </li>       
-                                                            <?php } else {?>
+                                                                    </li>   
+                                                                    
+                                                            <?php break ?>    
+                                                            <?php }  else {?>
                                                                     <?php echo ""?>        
+                                                                    
+                                                            <?php break ?>    
                                                             <?php }?>
+                                                            
                                                         <?php } else {?>
                                                                     <li class="list-group-item">
                                                                         <div class="row">
                                                                         <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>    
-                                                                        <div class="col-md-10 text-right"><a href="" class="btn btn-sm btn-primary"><i class="fas fa-sm "></i> Belum Bisa Mengajukan Kenaikan Pangkat</a>                                                           
+                                                                        <div class="col-md-10 text-right"><a href="" class="btn btn-sm btn-primary"><i class="fas fa-sm "></i> Belum Bisa Mengajukan Kenaikan Pangkat</a>                                 
                                                                         </div>
                                                                         </div>
                                                                     </li>
+                                                                    
+                                                            <?php break ?>    
                                                         <?php }?>
+                                                        
+                                                            <?php endforeach;?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -254,7 +297,7 @@
                                 
                                 <div class="tab-pane fade" id="kelengkapan" role="tabpanel" aria-labelledby="kelengkapan-tab">
                                     <div class="card-body">
-                                    <P style="color:red;">*) jika dokumen tidak berubah saat di upload silahkan silahkan bersihkan chached image and file terlebih dahulu
+                                    <P style="color:red;">*) jika dokumen tidak berubah saat diupload silahkan bersihkan chached image and file terlebih dahulu
                                     <br >*) bagi yang pertama kali mengajukan kenaikan pangkat SK_CPNS, SK_PNS, dan STTL_PRAJABATAN harus di isi </p>
                                     <div class="table-responsive">
                                             <table class="table table-bordered">
@@ -545,7 +588,7 @@
             </div>
             <div class="modal-body">
             <P style="color:red;">
-                *) berkas yang sudah diajukan tidak dapat di ubah
+                *) berkas yang sudah diajukan tidak dapat diubah
                 <br>
             </p>
             <table class="table table-bordered">

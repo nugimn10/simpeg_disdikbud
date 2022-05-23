@@ -13,6 +13,11 @@ class Model_master_berkas extends CI_Model
         return $this->db->get_where('master_berkas', ['id_berkas' => $berkas_id])->row();
     }
 
+    public function tampil_by_tgl($tgl_mulai)
+    {
+        return $this->db->get_where('master_berkas', ['tgl_mulai' => $tgl_mulai])->row();
+    }
+
     public function tambah_master_berkas($data, $table)
     {
         $this->db->insert($table, $data);

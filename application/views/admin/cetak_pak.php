@@ -18,7 +18,7 @@
         <input type="submit" value = "Search" />
     </form> -->
         <!-- table -->
-        <table id="dataTablesK" class="table table-bordered">
+        <table id="dataTables" class="table table-bordered">
             <thead class="thead-light">
                 <tr>
                     <th>NO</th>
@@ -34,7 +34,7 @@
             <tbody>
             <?php $no = 1;
             foreach ($pegawai as $pgw) : ?>
-                <?php if ($pgw->stts_knk_pkt >= 1 && $pgw->stts_knk_pkt <= 4 ) {?>
+                <?php if ($pgw->stts_knk_pkt == 5 ) {?>
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $pgw->nip ?></td>
@@ -43,7 +43,7 @@
                         <td><?php echo $pgw->uk ?></td>
                         <td style="width:150px;">
                         <?php if ($pgw->stts_knk_pkt != 4 && $pgw->stts_knk_pkt != 2){?>
-                            <?php echo anchor('supervisor/kenaikan_pangkat/periksa/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Periksa</button>') ?>
+                            <?php echo anchor('admin/cetak_pak/pak/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Cetak Pak</button>') ?>
                         <?php }?>
                         </td>
                     </tr>
