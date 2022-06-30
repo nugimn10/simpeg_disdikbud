@@ -276,7 +276,42 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-row justify-content-md-left">
+                            <div class="col-md-2 text-left mt-2">
+                                <label for="">Kepala Dinas</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-row">
+                                    <div class="col-md-5 input-group">
+                                    <input type="text" name="nm_kadis" id="nm_kadis" class="form-control">
+                                    </div>
+                                    <div class="col-md-2 text-right mt-2">
+                                    <label for="">NIP</label>
+                                    </div>
+                                    <div class="col-md-5 input-group">
+                                        <input type="text" name="nip_kadis" id="nip_kadis" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row justify-content-md-left">
+                            <div class="col-md-2.5 text-left mt-2">
+                                <label for="">Pangkat/Golongan  </label>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-row">
+                                    <div class="col-md-7 input-group">
+                                    <input type="text" name="pnkt" id="pnkt" class="form-control">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
+                    
             </div>
 
             <div class="modal-footer">

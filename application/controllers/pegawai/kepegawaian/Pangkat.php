@@ -35,7 +35,8 @@ class Pangkat extends CI_Controller
             'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
             'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id),
             'master_eselon' => $this->model_master_eselon->tampil_semua(),
-            'master_jabatan' => $this->model_master_jabatan->tampil_semua()
+            'master_jabatan' => $this->model_master_jabatan->tampil_semua(),
+            'master_golongan' => $this->model_master_golongan->tampil_semua()
         ];
 
         $this->load->view('templates/header', $data);

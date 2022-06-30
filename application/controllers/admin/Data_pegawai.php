@@ -230,7 +230,9 @@ class Data_pegawai extends CI_Controller
             'me' => $this->model_master_eselon->tampil_semua(),
             'mj' => $this->model_master_jabatan->tampil_semua(),
             'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
-            'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id)
+            'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id),
+            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
+            'berkas' => $this->model_master_berkas->tampil_semua()
         ];
 
         $this->load->view('templates/header', $data);

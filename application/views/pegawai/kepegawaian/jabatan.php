@@ -40,22 +40,15 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
-                            <label for="is_master_jabatan">Jabatan</label>
+                            <label for="is_master_jabatan">Jenis Jabatan</label>
                         </div>
                         <div class="col-md-7">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <select name="id_master_jabatan" class="custom-select">
+                                <select name="id_master_jabatan" class="custom-select">
                                         <option selected>Pilih Jabatan</option>
                                         <?php foreach ($master_jabatan as $mj) : ?>
                                             <option value="<?php echo $mj->id_master_jabatan ?>"><?php echo $mj->nm_jabatan ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                </div>
-                                <div class="col-md-3 text-right">
-                                    <a href="<?php echo base_url('admin/kepegawaian/master_jabatan'); ?>" class="btn btn-sm btn-primary" style="width:110px;"><i class="fas fa-sm fa-plus"></i> Add Jabatan</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,17 +56,22 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
-                            <label for="jenis_jbt">Jenis Jabatan</label>
+                            <label for="jenis_jbt">Jenis PTK</label>
                         </div>
                         <div class="col-md-7">
+                            
                             <select name="jenis_jbt" class="custom-select">
-                                <option selected>Pilih Jenis Jabatan</option>
-                                <option>Administrasi</option>
-                                <option>Pelaksana</option>
-                                <option>Struktural</option>
-                                <option>Fungsional</option>
-                                <option>Pimpinan Tinggi</option>
+                                <option selected>-</option>
+                                <option>Kepala Sekolah</option>
+                                <option>Guru Kelas</option>
+                                <option>Guru Mapel</option>
+                                <option>Guru BK</option>
+                                <option>Tenaga Administrasi Sekolah</option>
+                                <option>Penjaga Sekolah</option>
+                                <option>Lainnya</option>
+
                             </select>
+                           
                         </div>
                     </div>
                 </div>

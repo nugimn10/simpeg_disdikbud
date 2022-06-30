@@ -26,6 +26,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="orangtua-tab" data-toggle="tab" href="#orangtua" role="tab" aria-controls="orangtua" aria-selected="false">Orang Tua</a>
                                 </li> -->
+                                <li class="nav-item">
+                                        <a class="nav-item nav-link" id="kelengkapan-tab" data-toggle="tab" href="#kelengkapan" role="tab" aria-controls="kelengkapan" aria-selected="true">Kelengkapan</a>
+                                </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="data_diri" role="tabpanel" aria-labelledby="data_diri-tab">
@@ -264,6 +267,97 @@
                                                             <td><?php echo $ot->pkrj ?></td>
                                                             <td><?php echo $ot->stts_hub ?></td>
                                                         </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="kelengkapan" role="tabpanel" aria-labelledby="kelengkapan-tab">
+                                    <div class="card-body">
+                                        <P style="color:red;">*) jika dokumen tidak berubah saat diupload silahkan bersihkan chached image and file terlebih dahulu
+                                            <br>*) bagi yang pertama kali mengajukan kenaikan pangkat SK_CPNS, SK_PNS, dan STTL_PRAJABATAN harus di isi
+                                        </p>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>JENIS BERKAS</th>
+                                                        <th>FILE</th>
+                                                    </tr>
+                                                </thead>
+                                                <?php if ($detail->stts_knk_pkt) {
+                                                } ?>
+                                                <tbody>
+                                                    <?php
+                                                    foreach ($berkas as $bks) : ?>
+                                                        <tr>
+                                                            <td><?php echo $bks->nb ?></td>
+                                                            <td>
+                                                                <?php echo form_open_multipart('pegawai/profil_pegawai/upload_dokumen/' . $detail->id_pegawai . '/' . $bks->id_berkas); ?>
+                                                                <input id="berkas<?php echo $bks->id_berkas; ?>" name="berkas<?php echo $bks->id_berkas; ?>" type="file" accept=".doc,.docs,.pdf" value=""></input>
+                                                                <?php echo form_close(); ?>
+
+                                                            </td>
+                                                        </tr>
+                                                        <?php foreach ($kelengkapan as $klkn) : ?>
+                                                            <?php if ($klkn->berkas_id == $bks->id_berkas) { ?>
+
+                                                                <script>
+                                                                    $(document).ready(function() {
+                                                                        var urlData = "<?php echo base_url(); ?>upload/<?php echo $klkn->dokumen; ?>";
+                                                                        $("#berkas<?php echo $klkn->berkas_id; ?>").fileinput({
+                                                                            uploadUrl: "<?php echo base_url('pegawai/profil_pegawai/upload_dokumen/' . $detail->id_pegawai . '/' . $bks->id_berkas); ?>",
+                                                                            deleteUrl: "<?php echo base_url('pegawai/profil_pegawai/hapus_dokumen/' . $klkn->id_kelengkapan); ?>",
+                                                                            theme: 'explorer-fas',
+                                                                            showCaption: false,
+                                                                            showRemove: false,
+                                                                            showUpload: false,
+                                                                            showBrowse: true,
+                                                                            showDownload: true,
+                                                                            maxFileCount: 1,
+                                                                            dropZoneEnabled: false,
+                                                                            browseOnZoneClick: false,
+                                                                            preferIconicPreview: false,
+                                                                            pdfRendererUrl: 'https://plugins.krajee.com/pdfjs/web/viewer.html',
+                                                                            overwriteInitial: true,
+                                                                            initialPreviewAsData: true,
+                                                                            initialPreview: urlData,
+                                                                            initialPreviewConfig: [{
+                                                                                type: 'pdf',
+                                                                                description: "<h5>PDF File One</h5> This is a representative placeholder description number one for this PDF file.",
+                                                                                width: "100px"
+                                                                            }]
+                                                                        });
+                                                                    });
+                                                                </script>
+
+                                                            <?php } ?>
+                                                        <?php endforeach; ?>
+
+                                                        <script>
+                                                            $(document).ready(function() {
+                                                                $("#berkas<?php echo $bks->id_berkas; ?>").fileinput({
+                                                                    uploadUrl: "<?php echo base_url('pegawai/profil_pegawai/upload_dokumen/' . $detail->id_pegawai . '/' . $bks->id_berkas); ?>",
+                                                                    deleteUrl: "",
+                                                                    showCaption: false,
+                                                                    showRemove: false,
+                                                                    showUpload: false,
+                                                                    showBrowse: true,
+                                                                    dropZoneEnabled: false,
+                                                                    browseOnZoneClick: false,
+                                                                    pdfRendererUrl: 'https://plugins.krajee.com/pdfjs/web/viewer.html',
+                                                                    overwriteInitial: true,
+                                                                    initialPreviewAsData: true,
+                                                                    initialPreview: '',
+                                                                    initialPreviewConfig: [{
+                                                                        type: 'pdf',
+                                                                        description: "<h5>PDF File One</h5> This is a representative placeholder description number one for this PDF file."
+                                                                    }]
+                                                                });
+                                                            });
+                                                        </script>
                                                     <?php endforeach; ?>
                                                 </tbody>
 

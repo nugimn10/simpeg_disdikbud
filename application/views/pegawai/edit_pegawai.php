@@ -79,6 +79,28 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 col-sm-2 col-xs-2 text-right mt-2">
+                            <label for="nip">Jenis Guru</label>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+                            <input type="text" name="jg" id="jg" class="form-control" placeholder="Masukkan Jenis Guru" value="<?php echo $pegawai->jg ?>">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row justify-content-md-center">
+                        <div class="col-md-2 col-sm-2 col-xs-2 text-right mt-2">
+                            <label for="nip">Tugas Mengajar</label>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+                            <input type="text" name="tm" id="tm" class="form-control" placeholder="Masukkan Tugas Mengajar, Contoh : Kelas VII(24 Jam)" value="<?php echo $pegawai->tm ?>">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row justify-content-md-center">
+                        <div class="col-md-2 col-sm-2 col-xs-2 text-right mt-2">
                             <label for="nip">Unit Kerja</label>
                         </div>
                         <div class="col-md-7 col-sm-7 col-xs-7">

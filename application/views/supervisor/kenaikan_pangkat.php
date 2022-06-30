@@ -24,7 +24,9 @@
                     <th>NO</th>
                     <th>NIP</th>
                     <th>NAMA PEGAWAI</th>
-                    <th>JENIS KELAMIN</th>
+                    <th>JENIS JABATAN</th>
+                    <th>JABATAN</th>
+                    <th>KECAMATAN</th>
                     <th>UNIT KERJA</th>
                     <th>AKSI</th>
                 </tr>
@@ -33,13 +35,15 @@
             
             <tbody>
             <?php $no = 1;
-            foreach ($pegawai as $pgw) : ?>
+            foreach ($pegawai1 as $pgw) : ?>
                 <?php if ($pgw->stts_knk_pkt >= 1 && $pgw->stts_knk_pkt <= 4 ) {?>
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $pgw->nip ?></td>
                         <td style="width: 150px;"><?php echo $pgw->nm_pegawai ?></td>
-                        <td style="width: 150px;"><?php echo $pgw->jk ?></td>
+                        <td style="width: 150px;"><?php echo $pgw->jenis_jbt ?></td>
+                        <td style="width: 150px;"><?php echo $pgw->nm_jabatan ?></td>
+                        <td><?php echo $pgw->kec ?></td>
                         <td><?php echo $pgw->uk ?></td>
                         <td style="width:150px;">
                         <?php if ($pgw->stts_knk_pkt != 4 && $pgw->stts_knk_pkt != 2){?>

@@ -8,7 +8,7 @@
                     <div class="wrap-login100">
                         <form method="post" action="<?php echo base_url('auth/login'); ?>" class="login100-form validate-form"> 
                             <span class="login100-form-title "> Login </span> 
-                            <span class="login100-form-subtitle m-b-16"> akun SIMPEG Dinas Pendidikan Kab. Lebak </span>
+                            <span class="login100-form-subtitle m-b-16"> akun LOPE Dinas Pendidikan Kab. Lebak </span>
                             <div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz"> 
                             <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukkan Username" name="username" autofocus>
                                 <?php echo form_error('username', '<div class="text-danger small ml-3">', '</div>') ?>

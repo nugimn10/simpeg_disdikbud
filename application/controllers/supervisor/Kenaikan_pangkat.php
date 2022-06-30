@@ -23,6 +23,7 @@ class Kenaikan_pangkat extends CI_Controller
             'title' => 'Halaman Kenaikan Pangkat',
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'pegawai' => $this->model_pegawai->tampil_semua(),
+            'pegawai1' => $this->model_pegawai->tampil_berdasarkan_jabatan(),
         ];
 
         $this->load->view('templates/header', $data);
@@ -413,13 +414,19 @@ class Kenaikan_pangkat extends CI_Controller
         $nmr_surat = $this->input->post('nmr_surat');
         $ms_penilaian_awal = $this->input->post('ms_penilaian_awal');
         $ms_penilaian_akhir = $this->input->post('ms_penilaian_akhir');
-        $date = date('Y-m-d');
+        $date = $this->input->post('ms_penilaian_akhir');
+        $nm_kadis = $this->input->post('nm_kadis');
+        $nip_kadis = $this->input->post('nip_kadis');
+        $pnkt = $this->input->post('pnkt');
         $data2 = [
             'pegawai_id' => $pegawai->id_pegawai,
             'nmr_surat' => $nmr_surat,
             'ms_penilaian_awal' => $ms_penilaian_awal,
             'ms_penilaian_akhir' => $ms_penilaian_akhir,
-            'tgl_surat' => $date
+            'tgl_surat' => $date,
+            'nm_kadis' => $nm_kadis,
+            'nip_kadis' => $nip_kadis,
+            'pnkt' => $pnkt
         ];
 
         $this->db->insert('surat_pak', $data2);

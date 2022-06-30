@@ -34,7 +34,7 @@ class Cetak_pak extends CI_Controller
     }
 
     public function pak($id){
-        $this->load->library('dompdf_gen');
+        $this->load->library('Dompdf_gen');
 
         $data = [
             'title' => 'Halaman Cetak PAK',
@@ -48,9 +48,11 @@ class Cetak_pak extends CI_Controller
             'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
             'berkas' => $this->model_master_berkas->tampil_semua(),
             'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
+            'master_golongan' => $this->model_master_golongan->tampil_semua(),
             'surat_pak' => $this->db->get_where('surat_pak',['pegawai_id' => $id])->row(),
             'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id)
         ];
+        
         // $dump = $this->model_pak->tampil_by_id_pegawai($id);
         // var_dump($dump);
 
@@ -59,8 +61,8 @@ class Cetak_pak extends CI_Controller
         
         $paper_size = 'Legal';
         $orientation = 'portrait';
-
-        $html =  $this->output->get_output();
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);
+        $html = $this->output->get_output();
         $this->dompdf->set_paper($paper_size, $orientation);
         
         
@@ -92,12 +94,12 @@ class Cetak_pak extends CI_Controller
             'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
             'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
             'status' => $pegawai->status,
-            'stts_knk_pkt' => "7"
+            'stts_knk_pkt' => "5"
         ];
         
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data);
-        redirect('admin/cetak_pak/');
+        // redirect('admin/cetak_pak/');
     }
     
 }

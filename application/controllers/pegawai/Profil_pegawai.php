@@ -147,6 +147,8 @@ class Profil_pegawai extends CI_Controller
             $nuptk      = $this->input->post('nuptk');
             $nm_pegawai = $this->input->post('nm_pegawai');
             $jk         = $this->input->post('jk');
+            $jg         = $this->input->post('jg');
+            $tm         = $this->input->post('tm');
             $noserdik   = $this->input->post('noserdik');
             $nokarpeg   = $this->input->post('nokarpeg');
             $uk         = $this->input->post('uk');
@@ -194,6 +196,8 @@ class Profil_pegawai extends CI_Controller
                 'nuptk'      => $nuptk,
                 'nm_pegawai' => $nm_pegawai,
                 'jk'         => $jk,
+                'jg'         => $jg,
+                'tm'         => $tm,
                 'uk'         => $uk,
                 'noserdik'   => $noserdik,
                 'nokarpeg'   => $nokarpeg,

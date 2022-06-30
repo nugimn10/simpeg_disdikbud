@@ -8,6 +8,17 @@ class Model_pegawai extends CI_Model
         return $query->result();
     }
 
+    public function tampil_berdasarkan_jabatan()
+    {
+        $this->db->select('pegawai.id_pegawai, pegawai.nip, pegawai.nm_pegawai, pegawai.uk, pegawai.kec, jabatan.jenis_jbt, master_jabatan.nm_jabatan, pegawai.stts_knk_pkt');
+        $this->db->from('pegawai');
+        $this->db->join('jabatan', 'jabatan.id_pegawai = pegawai.id_pegawai', 'left');
+        $this->db->join('master_jabatan', 'master_jabatan.id_master_jabatan = jabatan.id_master_jabatan', 'left');
+        $this->db->group_by('pegawai.nip');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function cari_pegawai($key)
     {
         $this->db->like("nip",$key);

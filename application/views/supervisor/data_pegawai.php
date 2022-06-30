@@ -11,7 +11,7 @@
 
     <div class="row mt-3">
         <div class="col-md-6 mb-3">
-            <a href="<?php echo base_url('admin/data_pegawai/tambah'); ?>" class="btn btn-sm btn-primary"><i class="fas fa-sm fa-plus"></i> Tambah Pegawai</a>
+            <a href="<?php echo base_url('supervisor/data_pegawai/tambah'); ?>" class="btn btn-sm btn-primary"><i class="fas fa-sm fa-plus"></i> Tambah Pegawai</a>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
                 <tbody>
             <?php $no = 1;
             foreach ($pegawai as $pgw) : ?>
-                    <tr>
+                    <tr> 
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $pgw->nip ?></td>
                         <td style="width: 150px;"><?php echo $pgw->nm_pegawai ?></td>
@@ -52,13 +52,13 @@
 
                             <!-- <button type="button" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></button> -->
 
-                            <?php echo anchor('admin/data_pegawai/detail/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fa fa-folder-open"></i></button>') ?>
+                            <?php echo anchor('supervisor/data_pegawai/detail/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail"><i class="fa fa-folder-open"></i></button>') ?>
 
-                            <?php echo anchor('admin/data_pegawai/edit/' . $pgw->id_pegawai, ' <button type="button" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></button>') ?>
+                            <?php echo anchor('supervisor/data_pegawai/edit/' . $pgw->id_pegawai, ' <button type="button" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></button>') ?>
 
-                            <?php echo anchor('admin/data_pegawai/hapus/' . $pgw->id_pegawai, '<button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="far fa-trash-alt"></i></button>') ?>
+                            <?php echo anchor('supervisor/data_pegawai/hapus/' . $pgw->id_pegawai, '<button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="far fa-trash-alt"></i></button>') ?>
 
-                            <!-- <a href="<?php echo base_url('admin/data_pegawai/hapus/'); ?><?php $pgw->id_pegawai ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="far fa-trash-alt"></i></a> -->
+                            <!-- <a href="<?php echo base_url('supervisor/data_pegawai/hapus/'); ?><?php $pgw->id_pegawai ?>" class="btn btn-sm btn-danger tombol-hapus"><i class="far fa-trash-alt"></i></a> -->
 
                         </td>
 
