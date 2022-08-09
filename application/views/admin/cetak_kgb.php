@@ -26,6 +26,7 @@
                     <th>NAMA PEGAWAI</th>
                     <th>JENIS KELAMIN</th>
                     <th>UNIT KERJA</th>
+                    <th>KECAMATAN</th>
                     <th>AKSI</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@
                         <td style="width: 150px;"><?php echo $pgw->nm_pegawai ?></td>
                         <td style="width: 150px;"><?php echo $pgw->jk ?></td>
                         <td><?php echo $pgw->uk ?></td>
+                        <td><?php echo $pgw->kec ?></td>
                         <td style="width:150px;">
                         <?php if ($pgw->stts_knk_gj != 3){?>
                             <?php echo anchor('admin/cetak_kgb/kgb/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Cetak KGB</button>') ?>

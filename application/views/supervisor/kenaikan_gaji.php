@@ -18,7 +18,7 @@
         <input type="submit" value = "Search" />
     </form> -->
         <!-- table -->
-        <table id="dataTables" class="table table-bordered">
+        <table id="dataTablesK" class="table table-bordered">
         <thead class="thead-light">
                 <tr>
                     <th>NO</th>
