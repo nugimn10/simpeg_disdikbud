@@ -133,6 +133,12 @@
             </a>
         </li>
 
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'cetak_kgb' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>admin/cetak_kgb">
+                <i class="fas fa-lock"></i>
+                <span>Cetak KGB</span>
+            </a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block mt-3">

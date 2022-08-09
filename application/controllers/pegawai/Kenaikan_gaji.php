@@ -21,12 +21,17 @@ class Kenaikan_gaji extends CI_Controller
             redirect('auth/login');
         }
     }
-    public function index()
+
+    public function kgb($id)
     {
         $data = [
             'title' => 'Halaman Kenaikan Gaji Berkala',
             'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
             'pegawai' => $this->model_pegawai->tampil_semua(),
+            'detail' => $this->model_pegawai->tampil_by_id($id),
+            'master_kgb' => $this->model_master_kgb->tampil_semua(),
+            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
+            'kgb' => $this->model_kgb->tampil_by_id_pegawai($id)
         ];
 
         $this->load->view('templates/header', $data);
@@ -72,39 +77,114 @@ class Kenaikan_gaji extends CI_Controller
         redirect('pegawai/profil_pegawai/detail/'.$id);
     }
 
-    public function ajukan($id){
-        $this->load->library('dompdf_gen');
+    public function ajukan($id)
+    {
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
 
         $data = [
-            'title' => 'Halaman Cetak PAK',
-            'detail' => $this->model_pegawai->tampil_by_id($id),
-            'user' => $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array(),
-            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
-            'ak' => $this->model_ak->tampil_semua(),
-            'pak' => $this->model_pak->tampil_by_id_pegawai($id),
-            'sekolah' => $this->model_sekolah->tampil_by_id_pegawai($id),
-            'jabatan' => $this->model_jabatan->tampil_by_id_pegawai($id),
-            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
-            'berkas' => $this->model_master_berkas->tampil_semua(),
-            'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
-            'surat_pak' => $this->db->get_where('surat_pak',['pegawai_id' => $id])->row(),
-            'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id)
+            // 'nip'        => $pegawai->nip,
+            // 'nik'        => $pegawai->nik,
+            // 'nuptk'      => $pegawai->nuptk,
+            // 'nm_pegawai' => $pegawai->nm_pegawai,
+            // 'jk'         => $pegawai->jk,
+            // 'uk'         => $pegawai->uk,
+            // 'noserdik'   => $pegawai->noserdik,
+            // 'kec'        => $pegawai->kec,
+            // 'tpt_lhr'    => $pegawai->tpt_lhr,
+            // 'tgl_lhr'    => $pegawai->tgl_lhr,
+            // 'agama'      => $pegawai->agama,
+            // 'gol_darah'   => $pegawai->gol_darah,
+            // 'stts_pnkh'   => $pegawai->stts_pnkh,
+            // 'stts_kpgw'   => $pegawai->stts_kpgw,
+            // 'no_hp'      => $pegawai->no_hp,
+            // 'email'      => $pegawai->email,
+            // 'alamat'     => $pegawai->alamat,
+            // 'tgl_msk'    => $pegawai->tgl_msk,
+            // 'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
+            // 'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
+            // 'status' => $pegawai->status,
+            'stts_knk_gj' => "1"
         ];
-        // $dump = $this->model_pak->tampil_by_id_pegawai($id);
-        // var_dump($dump);
-
-        $detail = $this->model_pegawai->tampil_by_id($id);
-        $this->load->view('pegawai/pak', $data);
         
-        $paper_size = 'Legal';
-        $orientation = 'portrait';
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data);
+        $this->session->set_flashdata('message', 'Diubah');
+        redirect('pegawai/kenaikan_gaji/kgb/'.$id);
+    }
 
-        $html =  $this->output->get_output();
-        $this->dompdf->set_paper($paper_size, $orientation);
-        
-        $this->dompdf->load_html($html);
-        $this->dompdf->render();
-        $this->dompdf->stream("Penetapan_Angka_Kredit_".$detail->nip.".pdf", array('Attachment ' => 0 ));
+     public function upload_dokumen($id, $master_kgb_id)
+    {
+        $bks = $this->model_master_kgb->tampil_by_id($master_kgb_id);
+        $pgw = $this->model_pegawai->tampil_by_id($id);
+        $cek_kelengkapan = $this->db->get_where('kelengkapan', ['pegawai_id' => $id, 'berkas_id' => $master_kgb_id])->row();    
+
+        $new_name = $bks->nb.'_'.$pgw->nip;
+        $config['file_name'] = $new_name;
+        $berkas = $_FILES['berkas'.$master_kgb_id];
+
+            if ($berkas = '') { } else {
+    
+                $config['upload_path'] = './upload/kgb';
+                $config['allowed_types'] = 'pdf';
+
+                
+                $this->load->library('upload', $config);
+                $this->upload->overwrite = true;
+                if (!$this->upload->do_upload('berkas'.$master_kgb_id)) {
+                    echo "Upload Gagal";
+                    die();
+                } else {
+                    $berkas = $this->upload->data('file_name');
+                }
+            }
+       if($cek_kelengkapan != null){ 
+            $id_kelengkapan= $cek_kelengkapan->id_kelengkapan;
+            $where = ['id_kelengkapan' => $id_kelengkapan];
+            $data = [
+                'berkas_id' => $cek_kelengkapan->berkas_id,
+                'nd' => $cek_kelengkapan->nd,
+                'dokumen' => $cek_kelengkapan->dokumen,
+                'pegawai_id' => $cek_kelengkapan->pegawai_id,
+                'status' => '0'
+            ];
+            $this->model_kelengkapan->edit_kelengkapan($where,$data);
+            
+            echo json_encode(true);
+            die();
+        }else {
+            
+            $data = [
+                'berkas_id' => $master_kgb_id,
+                'nd' => $bks->nb,
+                'dokumen' => $berkas,
+                'pegawai_id' => $id,
+                'status' => '0'
+            ];
+            $this->model_kelengkapan->tambah_kelengkapan($data);
+            echo json_encode(true);
+            die();
+        };
+        echo json_encode(true);
 
     }
+
+    public function hapus_dokumen($id)
+    {
+        $this->load->helper("file");
+        $where = ['id_kelengkapan' => $id];
+        
+        $kelengkapan_file = $this->model_kelengkapan->tampil_by_id($id);
+        $path_to_file = base_url('/uploads/'.$kelengkapan_file->dokumen);
+        
+        if(!delete_files($path_to_file)) {
+            delete_files($path_to_file);
+            $this->model_kelengkapan->hapus_kelengkapan($where, 'kelengkapan');
+            
+            echo JSON_encode('');;
+        }
+        else {
+            echo 'errors occured;';
+        }
+    }
+
 }

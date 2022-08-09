@@ -109,8 +109,7 @@
                                                                     <li class="list-group-item">
                                                                         <div class="row">
                                                                         <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>    
-                                                                        <div class="col-md-10 text-right"><button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_master_jabatan">Ajukan Kenaikan Pangkat</button>                                                           
-                                                                        </div>
+                                                                        
                                                                         </div>
                                                                     </li>       
                                                             <?php } else {?>

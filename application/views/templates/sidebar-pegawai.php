@@ -43,14 +43,14 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>PAK</span>
             </a>
-        </li>
+        </li> -->
 
          <li class="nav-item <?php echo $this->uri->segment(2) == 'kgb' ? 'active' : null; ?>">
-            <a class="nav-link" href="<?php echo base_url(); ?>pegawai//kenaikan_gaji">
+            <a class="nav-link" href="<?php echo base_url('pegawai/kenaikan_gaji/kgb/'); ?><?php echo $user['id_pegawai']; ?>">
                 <i class="fas fa-fw fa-users"></i>
                 <span>KGB</span>
             </a>
-        </li> -->
+        </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item  <?php echo $this->uri->segment(2) == 'riwayat_keluarga' ? 'active' : null; ?>">

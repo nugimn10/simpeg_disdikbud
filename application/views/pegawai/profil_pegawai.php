@@ -103,10 +103,10 @@
                                                         <td>: <?php
                                                                 $timestamp = strtotime($detail->tgl_lhr);
                                                                 $new_date = date("d-m-Y", $timestamp);
-
                                                                 if ($detail->tpt_lhr == null) echo "";
-                                                                else  echo $detail->tpt_lhr ?>, <?php if ($detail->tgl_lhr == null) echo "";
-                                                                                                                                else echo $new_date ?></td>
+                                                                    else  echo $detail->tpt_lhr ?>, <?php 
+                                                                if ($detail->tgl_lhr == null) echo "";
+                                                                    else echo $new_date ?></td>
                                                     </tr>
                                                     <!-- <tr>
                                                         <th class="text-right">Tahun Pensiun</th>
