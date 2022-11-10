@@ -242,4 +242,195 @@ class Data_pegawai extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('templates/javascript');
     }
+
+    public function export(){
+    
+        include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+        
+      
+        $excel = new PHPExcel();
+        
+        $excel->getProperties()->setCreator('Dinas Pendidikan Kab.Lebak')
+                     ->setLastModifiedBy('Dinas Pendidikan Kab. Lebak')
+                     ->setTitle("Data Pegawai")
+                     ->setSubject("Pegawai")
+                     ->setDescription("Laporan Semua Data Pegawai")
+                     ->setKeywords("Data Pegawai");
+        
+        $style_col = array(
+          'font' => array('bold' => true), 
+          'alignment' => array(
+            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
+          ),
+          'borders' => array(
+            'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+            'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  
+            'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+            'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+          )
+        );
+        
+        $style_row = array(
+          'alignment' => array(
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
+          ),
+          'borders' => array(
+            'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+            'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  
+            'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+            'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) 
+          )
+        );
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA PEGAWAI DINAS PENDIDIKAN KAB. LEBAK"); 
+        $excel->getActiveSheet()->mergeCells('A1:J1'); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "NIP"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "NUPTK"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "NAMA"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "JK");
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "JENIS GURU"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('G3', "UNIT KERJA"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('H3', "KEC"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('I3', "NO SERDIK"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('J3', "NO KARPEG");
+        $excel->setActiveSheetIndex(0)->setCellValue('K3', "TPT LAHIR"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('L3', "ALAMAT"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('M3', "TGL KNK PKT"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('N3', "TGL KNK GJ"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('O3', "JABATAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('P3', "GOLONGAN"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('Q3', "PANGKAT"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('Q3', "PENDIDIKAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('R3', "THN PENSIUN");
+        
+        $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('O3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('P3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('Q3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('R3')->applyFromArray($style_col);
+        
+        $pegawai = $this->model_pegawai->tampil_semua();
+        $no = 1; 
+        $numrow = 4; 
+        foreach($pegawai as $data){ 
+          $jabatan = $this->model_jabatan->tampil_by_id_pegawai($data->id_pegawai);
+          $pangkat = $this->model_pangkat->tampil_by_id_pegawai($data->id_pegawai);
+          $sekolah = $this->model_sekolah->tampil_by_id_pegawai($data->id_pegawai);
+          foreach($jabatan as $jb)
+          {
+
+          }
+          foreach($pangkat as $pkt)
+          {
+
+          }
+          foreach($sekolah as $sklh)
+          {
+
+          }
+          $knkpkt = date('d-m-Y',strtotime($data->tgl_knk_pkt.'+ 4 years'));
+          $knkgj = date('d-m-Y',strtotime($data->tgl_knk_gj.'+ 2 years'));
+          if ($jb->jns_jabatan == "FUNGSIONAL UMUM"||$jb->jns_jabatan == "STRUKTURAL" ) { $pensiun = date('d-m-Y', strtotime($data->tgl_lhr.'+ 58 years')); } 
+          else if ($jb->jns_jabatan == "FUNGSIONAL TERTENTU"){ $pensiun = date('d-m-Y', strtotime($data->tgl_lhr.'+ 60 years'));}
+
+          $excel->setActiveSheetIndex(0)->setCellValue('A'.$numrow, $no);
+          $excel->getActiveSheet()->getCell('B'.$numrow)->setValueExplicit($data->nip, PHPExcel_Cell_DataType::TYPE_STRING);;
+          // $excel->setActiveSheetIndex(0)->setCellValue('B'.$numrow, $data->nip);
+          $excel->getActiveSheet()->getCell('C'.$numrow)->setValueExplicit($data->nuptk, PHPExcel_Cell_DataType::TYPE_STRING);;
+          // $excel->setActiveSheetIndex(0)->setCellValue('C'.$numrow, $data->nuptk);
+          $excel->setActiveSheetIndex(0)->setCellValue('D'.$numrow, $data->nm_pegawai);
+          $excel->setActiveSheetIndex(0)->setCellValue('E'.$numrow, $data->jk);
+          $excel->setActiveSheetIndex(0)->setCellValue('F'.$numrow, $data->jg);
+          $excel->setActiveSheetIndex(0)->setCellValue('G'.$numrow, $data->uk);
+          $excel->setActiveSheetIndex(0)->setCellValue('H'.$numrow, $data->kec);
+          $excel->setActiveSheetIndex(0)->setCellValue('I'.$numrow, $data->noserdik);
+          $excel->setActiveSheetIndex(0)->setCellValue('J'.$numrow, $data->nokarpeg);
+          $excel->setActiveSheetIndex(0)->setCellValue('K'.$numrow, $data->tpt_lhr);
+          $excel->setActiveSheetIndex(0)->setCellValue('L'.$numrow, $data->alamat);
+          $excel->setActiveSheetIndex(0)->setCellValue('M'.$numrow, $knkpkt);
+          $excel->setActiveSheetIndex(0)->setCellValue('N'.$numrow, $knkgj);
+          $excel->setActiveSheetIndex(0)->setCellValue('O'.$numrow, $jb->nm_jabatan);
+          // $excel->getActiveSheet()->getCell('c'.$numrow)->setValueExplicit($jb->nm_jabatan, PHPExcel_Cell_DataType::TYPE_STRING);;
+          $excel->setActiveSheetIndex(0)->setCellValue('P'.$numrow, $pkt->golongan);
+          $excel->setActiveSheetIndex(0)->setCellValue('Q'.$numrow, $sklh->tingkat);
+          $excel->setActiveSheetIndex(0)->setCellValue('R'.$numrow, $pensiun);
+          
+          
+          $excel->getActiveSheet()->getStyle('A'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('B'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('C'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('D'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('E'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('F'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('G'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('H'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('I'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('J'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('K'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('L'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('M'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('N'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('O'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('P'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('Q'.$numrow)->applyFromArray($style_row);
+          $excel->getActiveSheet()->getStyle('R'.$numrow)->applyFromArray($style_row);
+          
+          $no++; 
+          $numrow++; 
+        }
+        
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5); 
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(25); 
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); 
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(30); 
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(30); 
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(20); 
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(30); 
+        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('L')->setWidth(30); 
+        $excel->getActiveSheet()->getColumnDimension('M')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('N')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('O')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('P')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('Q')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('R')->setWidth(15); 
+        
+        
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        
+        $excel->getActiveSheet(0)->setTitle("Laporan Data Pegawai");
+        $excel->setActiveSheetIndex(0);
+        
+        $filename="Data_Pegawai_".date('d-m-Y').".xls";
+        $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+        ob_end_clean();
+        header('Content-type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename='.$filename);
+        $objWriter->save('php://output');
+      }
+    
 }

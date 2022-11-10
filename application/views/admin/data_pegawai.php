@@ -10,8 +10,11 @@
     <!-- <button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_pegawai"><i class="fas fa-plus-circle fa-sm"></i> Tambah Pegawai</button> -->
 
     <div class="row mt-3">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-2 mb-3">
             <a href="<?php echo base_url('admin/data_pegawai/tambah'); ?>" class="btn btn-sm btn-primary"><i class="fas fa-sm fa-plus"></i> Tambah Pegawai</a>
+        </div>
+        <div class="col-md-2 mb-3">
+            <a href="<?php echo base_url('admin/data_pegawai/export'); ?>" class="btn btn-sm btn-primary"><i class="fas fa-sm fa-print"></i> Cetak Excel</a>
         </div>
     </div>
 
