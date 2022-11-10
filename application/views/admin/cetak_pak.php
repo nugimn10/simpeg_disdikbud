@@ -43,7 +43,8 @@
                         <td><?php echo $pgw->uk ?></td>
                         <td style="width:150px;">
                         <?php if ($pgw->stts_knk_pkt != 4 && $pgw->stts_knk_pkt != 2){?>
-                            <?php echo anchor('admin/cetak_pak/pak/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Cetak Pak</button>') ?>
+                            <?php echo anchor('admin/cetak_pak/pak/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak PAK"><i class="fa fa-print" aria-hidden="true"></i></button>') ?>
+                            <?php echo anchor('admin/cetak_pak/selesai/' . $pgw->id_pegawai, '<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Selesai"><i class="fa fa-check-square" aria-hidden="true"></i></button>') ?>
                         <?php }?>
                         </td>
                     </tr>

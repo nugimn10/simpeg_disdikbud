@@ -45,7 +45,8 @@
                         <td><?php echo $pgw->kec ?></td>
                         <td style="width:150px;">
                         <?php if ($pgw->stts_knk_gj != 3){?>
-                            <?php echo anchor('admin/cetak_kgb/kgb/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Detail">Cetak KGB</button>') ?>
+                            <?php echo anchor('admin/cetak_kgb/kgb/' . $pgw->id_pegawai, '<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Cetak KGB"><i class="fa fa-print" aria-hidden="true"></i></button>') ?>
+                            <?php echo anchor('admin/cetak_kgb/selesai/' . $pgw->id_pegawai, '<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Selesai"><i class="fa fa-check-square" aria-hidden="true"></i></button>') ?>
                         <?php }?>
                         </td>
                     </tr>
