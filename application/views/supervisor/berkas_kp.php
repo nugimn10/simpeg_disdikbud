@@ -141,6 +141,7 @@
                                                         <th width="40%">UNSUR</th>
                                                         <th width="10%">ANGKA KREDIT LAMA</th>
                                                         <th width="5%">ANGKA KREDIT BARU</th>
+                                                        <th width="5%">JML</th>
                                                     </tr>
                                                 </thead>
                                                     <tbody>
@@ -160,12 +161,22 @@
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
                                                                 <input id="akb<?php echo $angka->id_ak;?>" name="akb<?php echo $angka->id_ak;?>" type="number" value="" step="any"></input> 
                                                             </td>
-                                                            
+                                                            <td>
+                                                            <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
+                                                                <input id="akb<?php echo $angka->id_ak;?>" name="akb<?php echo $angka->id_ak;?>" type="number" value="" step="any" readonly></input> 
+                                                            </td>
                                                         </tr>
                                                     <?php endforeach; ?> 
                                                     <?php } else {?>
                                                         <?php foreach ($pak as $angka) : ?>
                                                         <tr>
+                                                            <script> 
+                                                            $(function () {
+                                                                $("#akl<?php echo $angka->id_pak;?>, #akb<?php echo $angka->id_pak;?>").keyup(function () {
+                                                                    $("#jml<?php echo $angka->id_pak;?>").val(+$("#akl<?php echo $angka->id_pak;?>").val() + +$("#akb<?php echo $angka->id_pak;?>").val());
+                                                                });
+                                                            }); 
+                                                            </script>
                                                             <td><?php echo $angka->unsur ?>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
                                                                 <input id="unsur<?php echo $angka->id_pak;?>" name="unsur<?php echo $angka->id_pak;?>" type="hidden"  value="<?php echo $angka->unsur ?>"></input> 
@@ -178,7 +189,10 @@
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
                                                                 <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>" step="any"></input> 
                                                             </td>
-                                                            
+                                                            <td>
+                                                            <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
+                                                                <input id="jml<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number" readonly></input> 
+                                                            </td>
                                                         </tr>
                                                     <?php endforeach; ?> 
                                                     <?php }?>
