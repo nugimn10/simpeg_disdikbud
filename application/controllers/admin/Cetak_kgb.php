@@ -59,7 +59,7 @@ class Cetak_kgb extends CI_Controller
         $detail = $this->model_pegawai->tampil_by_id($id);
         $this->load->view('pegawai/surat_kgb', $data);
         
-        $paper_size = 'Legal';
+        $paper_size = 'F4';
         $orientation = 'portrait';
         $this->dompdf->set_option('isRemoteEnabled', TRUE);
         $html = $this->output->get_output();
@@ -73,12 +73,52 @@ class Cetak_kgb extends CI_Controller
         $pegawai = $this->model_pegawai->tampil_by_id($id);
 
         $data = [
-            'stts_knk_gj' => "3"
+            'stts_knk_gj' => "2"
         ];
         
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data);
         // redirect('admin/cetak_pak/');
+    }
+
+    public function selesai($id){
+
+
+        $data = [
+            'tgl_knk_gj' => date("Y-m-d"),
+            'stts_knk_gj' => "0"
+        ];
+        $berkas = $this->model_kelengkapan->tampil_by_id_pegawai($id);
+        foreach ($berkas as $bks) {
+            
+        }
+        for ($i=101; $i < 105; $i++) { 
+
+            if ($bks->berkas_id == $i) {
+                $this->load->helper("file");
+                $where = ['id_kelengkapan' => $bks->id_kelengkapan];
+                
+                $kelengkapan_file = $this->model_kelengkapan->tampil_by_id($bks->id_kelengkapan);
+                var_dump($kelengkapan_file);
+                $path_to_file = base_url('/uploads/'.$kelengkapan_file->dokumen);
+                
+                if(!delete_files($path_to_file)) {
+                    delete_files($path_to_file);
+                    $this->model_kelengkapan->hapus_kelengkapan($where, 'kelengkapan');
+                    
+                    echo JSON_encode('');;
+                }
+                else {
+                    echo 'errors occured;';
+                }
+            }
+            
+        }
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data);
+        $this->session->set_flashdata('message', '');
+        redirect('admin/cetak_kgb/');
     }
     
 }
