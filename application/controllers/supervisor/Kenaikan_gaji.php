@@ -60,7 +60,23 @@ class Kenaikan_gaji extends CI_Controller
         $data1 = [
             'stts_knk_gj' => "2"
         ];
+
+        $catatan = "Selesai";
+        $kgb = $this->model_kgb->tampil_by_id_pegawai($id);
+        $data2 = [
+            'pegawai_id' => $id,
+            'catatan' => $catatan,
+            'status' => "2",
+            'last_update' =>  date("Y-m-d")
+        ];  
         
+        if ($kgb == null) {
+            $this->model_kgb->tambah_kgb($data2);    
+        } else {    
+            $this->db->where('pegawai_id', $id);
+            $this->db->update('kgb', $data2);
+        }
+
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data1);
 
@@ -86,8 +102,40 @@ class Kenaikan_gaji extends CI_Controller
 
         $this->db->insert('surat_kgb', $data2);
 
-        $this->session->set_flashdata('message', 'selesai');
+        $this->session->set_flashdata('message', 'memenuhi syarat');
         redirect('supervisor/kenaikan_gaji/');
-
     }
+
+    public function btl($id)
+    {
+
+        $pegawai = $this->model_pegawai->tampil_by_id($id);
+        $data1 = [
+            'stts_knk_gj' => "0"
+        ];
+
+        $catatan = $this->input->post('notes');
+        $kgb = $this->model_kgb->tampil_by_id_pegawai($id);
+        $data2 = [
+            'pegawai_id' => $id,
+            'catatan' => $catatan,
+            'status' => "0",
+            'last_update' =>  date("Y-m-d")
+        ];  
+        
+        if ($kgb == null) {
+            $this->model_kgb->tambah_kgb($data2);    
+        } else {    
+            $this->db->where('pegawai_id', $id);
+            $this->db->update('kgb', $data2);
+        }
+        
+        
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('pegawai', $data1);
+        
+        $this->session->set_flashdata('message', 'dikirim ke pegawai untuk di perbaiki');
+        redirect('supervisor/kenaikan_gaji/');
+    }
+
 }

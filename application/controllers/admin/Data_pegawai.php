@@ -230,9 +230,7 @@ class Data_pegawai extends CI_Controller
             'me' => $this->model_master_eselon->tampil_semua(),
             'mj' => $this->model_master_jabatan->tampil_semua(),
             'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
-            'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id),
-            'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
-            'berkas' => $this->model_master_berkas->tampil_semua()
+            'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id)
         ];
 
         $this->load->view('templates/header', $data);
@@ -242,7 +240,7 @@ class Data_pegawai extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('templates/javascript');
     }
-
+    
     public function export(){
     
         include APPPATH.'third_party/PHPExcel/PHPExcel.php';
@@ -432,5 +430,4 @@ class Data_pegawai extends CI_Controller
         header('Content-Disposition: attachment; filename='.$filename);
         $objWriter->save('php://output');
       }
-    
 }

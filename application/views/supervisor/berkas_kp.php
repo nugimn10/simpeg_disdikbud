@@ -109,7 +109,8 @@
                                                                     <li class="list-group-item">
                                                                         <div class="row">
                                                                         <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>    
-                                                                        
+                                                                        <div class="col-md-10 text-right"><button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#tambah_master_jabatan">Ajukan Kenaikan Pangkat</button>                                                           
+                                                                        </div>
                                                                         </div>
                                                                     </li>       
                                                             <?php } else {?>
@@ -149,6 +150,13 @@
                                                     <?php 
                                                     foreach ($ak as $angka) : ?>
                                                         <tr>
+                                                        <script> 
+                                                            $(function () {
+                                                                $("#akl<?php echo $angka->id_ak; ?>, #akb<?php echo $angka->id_ak; ?>").keyup(function() {
+                                                                    $("#jml<?php echo $angka->id_ak; ?>").val(parseFloat(+$("#akl<?php echo $angka->id_ak; ?>").val() + +$("#akb<?php echo $angka->id_ak; ?>").val()).toFixed(3));
+                                                                });
+                                                            }); 
+                                                            </script>
                                                             <td><?php echo $angka->sub_unsur ?>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
                                                                 <input id="unsur<?php echo $angka->id_ak;?>" name="unsur<?php echo $angka->id_ak;?>" type="hidden"  value="<?php echo $angka->sub_unsur ?>"></input> 
@@ -163,19 +171,19 @@
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akb<?php echo $angka->id_ak;?>" name="akb<?php echo $angka->id_ak;?>" type="number" value="" step="any" readonly></input> 
+                                                                <input id="jml<?php echo $angka->id_ak;?>" name="jml<?php echo $angka->id_ak;?>" type="number" step="any" value="0.000" placeholder="0.000" step="0.001"  readonly></input> 
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?> 
                                                     <?php } else {?>
                                                         <?php foreach ($pak as $angka) : ?>
                                                         <tr>
-                                                            <script> 
-                                                            $(function () {
-                                                                $("#akl<?php echo $angka->id_pak;?>, #akb<?php echo $angka->id_pak;?>").keyup(function () {
-                                                                    $("#jml<?php echo $angka->id_pak;?>").val(+$("#akl<?php echo $angka->id_pak;?>").val() + +$("#akb<?php echo $angka->id_pak;?>").val());
+                                                            <script>
+                                                                $(function() {
+                                                                    $("#akl<?php echo $angka->id_pak; ?>, #akb<?php echo $angka->id_pak; ?>").keyup(function() {
+                                                                        $("#jml<?php echo $angka->id_pak; ?>").val(parseFloat(+$("#akl<?php echo $angka->id_pak; ?>").val() + +$("#akb<?php echo $angka->id_pak; ?>").val()).toFixed(3));
+                                                                    });
                                                                 });
-                                                            }); 
                                                             </script>
                                                             <td><?php echo $angka->unsur ?>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
@@ -191,7 +199,7 @@
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="jml<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number" readonly></input> 
+                                                                <input id="jml<?php echo $angka->id_pak;?>" name="jml<?php echo $angka->id_pak;?>" type="number" step="any" value="0.000" placeholder="0.000" step="0.001"  readonly></input> 
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?> 
@@ -289,7 +297,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="form-row justify-content-md-left">
                             <div class="col-md-2 text-left mt-2">
                                 <label for="">Kepala Dinas</label>
@@ -324,7 +332,6 @@
                         </div>
                         
                     </div>
-                    
             </div>
 
             <div class="modal-footer">

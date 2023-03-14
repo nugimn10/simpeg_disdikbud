@@ -43,7 +43,7 @@
                                                                 <!-- <a href="<?php echo base_url(); ?>supervisor/kenaikan_pangkat/download/<?php echo $klkn->id_kelengkapan; ?>" target="_blank">Download</a> -->
                                                                 
                                                                 <a class="btn btn-primary" href="<?=base_url('./upload/'.$klkn->dokumen)?>" target="_blank">Periksa</a>
-                                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+                                                                <!--<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />-->
   <label class="form-check-label" for="inlineCheckbox2"></label>                                           
                                                             </td>
                                                             <!-- <td> -->
@@ -142,23 +142,40 @@
                                                         <th width="40%">UNSUR</th>
                                                         <th width="10%">ANGKA KREDIT LAMA</th>
                                                         <th width="5%">ANGKA KREDIT BARU</th>
+                                                        <th width="5%">JML</th>
                                                     </tr>
                                                 </thead>
                                                     <tbody>
                                                     <?php 
                                                     foreach ($ak as $angka) : ?>
                                                         <tr>
+                                                            <script> 
+                                                            $(function () {
+                                                                $("#akl<?php echo $angka->id_pak;?>, #akb<?php echo $angka->id_pak;?>").keyup(function () {
+                                                                    $("#jml<?php echo $angka->id_pak;?>").val(+$("#akl<?php echo $angka->id_pak;?>").val() + +$("#akb<?php echo $angka->id_pak;?>").val());
+                                                                });
+                                                            }); 
+                                                            </script>
                                                             <td><?php echo $angka->unsur ?>
                                                             <?php echo form_open_multipart('verifikator/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
                                                                 <input id="unsur<?php echo $angka->id_pak;?>" name="unsur<?php echo $angka->id_pak;?>" type="hidden"  value="<?php echo $angka->unsur ?>"></input> 
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('verifikator/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akl<?php echo $angka->id_pak;?>" name="akl<?php echo $angka->id_pak;?>" type="number" value="<?php echo $angka->angka_lama != null ? $angka->angka_lama : '0'; ?>" step=any></input> 
+                                                                <input id="akl<?php echo $angka->id_pak;?>" name="akl<?php echo $angka->id_pak;?>" type="number" value="<?php echo $angka->angka_lama != null ? $angka->angka_lama : '0'; ?>" step="any"></input> 
                                                             </td>
                                                             <td>
                                                             <?php echo form_open_multipart('verifikator/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
-                                                                <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>" step=any></input> 
+                                                                <input id="akb<?php echo $angka->id_pak;?>" name="akb<?php echo $angka->id_pak;?>" type="number"  value="<?php echo $angka->angka_baru != null ? $angka->angka_baru : '0'; ?>" step="any"></input> 
+                                                            </td>
+                                                            <td>
+                                                            <?php
+                                                            $ak1 = $angka->angka_lama != null ? $angka->angka_lama : '0.000';
+                                                            $ak2 = $angka->angka_baru != null ? $angka->angka_baru : '0.000';
+                                                            $jml = $ak1 + $ak2;
+                                                            ?>
+                                                            <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
+                                                                <input id="jml<?php echo $angka->id_pak;?>" name="jml<?php echo $angka->id_pak;?>" type="number" value="<?php echo $jml+0.000; ?>" step="any" readonly></input> 
                                                             </td>
                                                             
                                                         </tr>

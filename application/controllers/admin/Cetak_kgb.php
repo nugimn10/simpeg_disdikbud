@@ -80,7 +80,7 @@ class Cetak_kgb extends CI_Controller
         $this->db->update('pegawai', $data);
         // redirect('admin/cetak_pak/');
     }
-
+    
     public function selesai($id){
 
 
@@ -117,7 +117,6 @@ class Cetak_kgb extends CI_Controller
         
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data);
-        $this->session->set_flashdata('message', '');
         redirect('admin/cetak_kgb/');
     }
     

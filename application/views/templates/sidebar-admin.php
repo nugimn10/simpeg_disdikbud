@@ -126,19 +126,39 @@
             </a>
         </li>
         
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'kenaikan_pangkat' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>admin/kenaikan_pangkat">
+                <i class="fas fa-lock"></i>
+                <span>Kenaikan Pangkat</span>
+            </a>
+        </li>
         <li class="nav-item <?php echo $this->uri->segment(2) == 'cetak_pak' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>admin/cetak_pak">
                 <i class="fas fa-lock"></i>
                 <span>Cetak PAK</span>
             </a>
         </li>
-
+        
+        
         <li class="nav-item <?php echo $this->uri->segment(2) == 'cetak_kgb' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>admin/cetak_kgb">
                 <i class="fas fa-lock"></i>
                 <span>Cetak KGB</span>
             </a>
         </li>
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'cetak_kgb' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>admin/cetak_izin">
+                <i class="fas fa-lock"></i>
+                <span>Cetak Izin</span>
+            </a>
+        </li>
+        <li class="nav-item <?php echo $this->uri->segment(2) == 'cetak_kgb' ? 'active' : null; ?>">
+            <a class="nav-link" href="<?php echo base_url(); ?>admin/bazeting">
+                <i class="fas fa-lock"></i>
+                <span>Bazeting</span>
+            </a>
+        </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block mt-3">

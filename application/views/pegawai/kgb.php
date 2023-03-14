@@ -15,36 +15,37 @@
             
             <?php
             $date1 = new DateTime($detail->tgl_knk_gj);
-                                                        $date2 = new DateTime('now');
-                                                        $interval = $date1->diff($date2);
-                                                        //  echo "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days " . $interval->days . " days "; 
-                                                        ?>
-                                                        <?php foreach ($master_kgb as $mb) : ?>
-                                                            <?php if ($interval->y >= 2 && $mb->id_master_kgb == 101) { ?>
-                                                                <?php if ($detail->stts_knk_pkt == 0) { ?>
-                                                                        <div class="row">
-                                                                            <div class="col-md-10 text-right"><button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#buat_kgb">Ajukan Kenaikan Gaji</button>
-                                                                            </div>
-                                                                        </div>
+                $date2 = new DateTime('now');
+                $interval = $date1->diff($date2);
+                $MonthCount = (($interval->y) * 12) + ($interval->m);
+                // echo $MonthCount;
+                //  echo "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days " . $interval->days . " days "; 
+                ?>
+                <?php foreach ($master_kgb as $mb) : ?>
+                    <?php if ($MonthCount >= 21 && $mb->id_master_kgb == 101) { ?>
+                        <?php if ($detail->stts_knk_gj == 0) { ?>
+                                <div class="row">
+                                    <div class="col-md-10 text-right"><button class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target=<?php if ($pangkat != null && $jabatan != null) { echo "#buat_kgb";} else { echo "#belum_lengkap";}?> >Ajukan Kenaikan Gaji</button>
+                                    </div>
+                                </div>
+                            <?php break ?>
+                        <?php } else { ?>
+                            <?php echo "" ?>
 
-                                                                    <?php break ?>
-                                                                <?php } else { ?>
-                                                                    <?php echo "" ?>
+                            <?php break ?>
+                        <?php } ?>
 
-                                                                    <?php break ?>
-                                                                <?php } ?>
+                    <?php } else { ?>
+                            <div class="row">
+                                <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="col-md-10 text-right"><a href="" class="btn btn-sm btn-primary"><i class="fas fa-sm "></i> Belum Bisa Mengajukan Kenaikan Gaji</a>
+                                </div>
+                            </div>
 
-                                                            <?php } else { ?>
-                                                                    <div class="row">
-                                                                        <div class="col-md-2 text-left"><i class="fas fa-clipboard-list"></i></div>
-                                                                        <div class="col-md-10 text-right"><a href="" class="btn btn-sm btn-primary"><i class="fas fa-sm "></i> Belum Bisa Mengajukan Kenaikan Gaji</a>
-                                                                        </div>
-                                                                    </div>
+                        <?php break ?>
+                    <?php } ?>
 
-                                                                <?php break ?>
-                                                            <?php } ?>
-
-                                                        <?php endforeach; ?>
+                <?php endforeach; ?>
         </div>
     </div>
 
@@ -57,19 +58,28 @@
         <table id="dataTables" class="table table-bordered">
             <thead class="thead-light">
                 <tr>
-                    <th>NO</th>
-                    <th>NIP</th>
                     <th>NAMA PEGAWAI</th>
-                    <th>JENIS KELAMIN</th>
                     <th>UNIT KERJA</th>
-                    <th>AKSI</th>
+                    <th>STATUS</th>
+                    <th>CATATAN</th>
                 </tr>
             </thead>
-            
-            
-            <tbody>
-                <tr><td> Belum Ada Usulan</td></tr>
-                </tbody>
+            <?php foreach ($kgb as $knk_gj) : ?>
+            <tr>
+                <td style="width: 20%;"><?php if ($knk_gj != null) echo $detail->nm_pegawai; else echo "" ?></td>
+                <td style="width: 20%;"><?php if($knk_gj != null) echo $detail->uk; else echo ""?></td>
+                <td style="width: 20%;"><?php if($knk_gj != null & $knk_gj->status == 0 ) echo "Berkas Tidak Lengkap"; else if ($knk_gj != null & $knk_gj->status == 1) echo "Pemeriksaan Supervisor"; else if ($knk_gj != null & $knk_gj->status == 2) echo "Memenuhi Syarat"; else echo ""?><? echo "" ?></td>
+                <td style="width: 20%;">
+                <?php if ($knk_gj->status == 0) { ?>
+                    <button type="button" class="btn btn-warning" disabled><?php if($knk_gj != null) echo $knk_gj->catatan; else echo ""?></button>
+                <?php } else if ($knk_gj->status == 1) { ?>
+                    <button type="button" class="btn btn-warning" disabled><?php if($knk_gj != null) echo $knk_gj->catatan; else echo ""?></button>
+                <?php } else if ($knk_gj->status == 2) { ?>
+                    <button type="button" class="btn btn-success" disabled><?php if($knk_gj != null) echo $knk_gj->catatan; else echo ""?></button>
+                </td>
+                <?}?>
+                </tr>
+                <?php endforeach; ?>
         </table>
 
     </div>
@@ -207,3 +217,23 @@
 
 </div>
 
+
+<div class="modal fade bd-example-modal-lg" id="belum_lengkap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pangkat Jabatan Belum di isi silahkan lengkapi terlebih dahulu pada profile anda.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>

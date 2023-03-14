@@ -99,7 +99,7 @@
                                         <strong>s.d.</strong>
                                     </div>
                                     <div class="col-md-5 input-group">
-                                        <input type="date" name="sampai_tgl" id="sampai_tgl" class="form-control" value="<?php echo $i->sampai_tgl;?>" >
+                                        <input type="date" name="sampai_tgl" id="sampai_tgl" class="form-control" value="<?php echo $i->dari_tgl;?>" >
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                                         </div>

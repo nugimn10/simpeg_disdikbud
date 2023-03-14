@@ -1,13 +1,15 @@
 <div class="container-fluid">
 
     <div class="card">
-        <h6 class="card-header"><strong>DATA PANGKAT</strong></h6>
+        <h6 class="card-header"><strong>DATA PENDIDIKAN</strong></h6>
         <div class="card-body">
-            <form action="<?php echo base_url('pegawai/kepegawaian/pangkat/tambah/'. $detail->id_pegawai) ?>" method="post">
+        <form action="<?php echo base_url('pegawai/riwayat_pendidikan/sekolah/edit/'. $detail->id_pegawai.'/'. $sekolah->id_sekolah) ?>" method="post">
+
 
                 <div class="form-group">
                         <div class="col-md-7 col-sm-7 col-xs-7">
                             <input type="text" name="id_pegawai" class="form-control" value="<?php echo $detail->id_pegawai ?>" hidden>
+                            <input type="text" name="id_sekolah" class="form-control" value="<?php echo $sekolah->id_sekolah ?>" hidden>                            
                         </div>
                     <div class="form-row justify-content-md-center">
                         
@@ -24,14 +26,20 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
-                            <label for="id_master_golongan">Golongan</label>
+                            <label for="tingkat">Tingkat</label>
                         </div>
                         <div class="col-md-7">
-                            <select name="id_master_golongan" class="custom-select">
-                                <option selected>Pilih Golongan</option>
-                                <?php foreach ($master_golongan as $mg) : ?>
-                                    <option value="<?php echo $mg->id_master_golongan ?>"><?php echo $mg->golongan ?></option>
-                                <?php endforeach; ?>
+                            <select name="tingkat" class="custom-select">
+                                <option selected><?php echo $sekolah->tingkat ?></option>
+                                <option>SD </option>
+                                <option>SMP/MTs </option>
+                                <option>SMA Sederajat</option>
+                                <option>D1</option>
+                                <option>D2</option>
+                                <option>D3</option>
+                                <option>S1/D4</option>
+                                <option>S2</option>
+                                <option>S3</option>
                             </select>
                         </div>
                     </div>
@@ -39,16 +47,11 @@
 
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
-                        <div class="col-md-2 text-right mt-2">
-                            <label for="pangkat">Pangkat</label>
+                        <div class="col-md-2 text-right">
+                            <label for="nm_skl_uv">Nama Sekolah / Universitas</label>
                         </div>
                         <div class="col-md-7">
-                            <select name="pangkat" class="custom-select">
-                                <option selected>Pilih Pangkat</option>
-                                <?php foreach ($master_golongan as $mg) : ?>
-                                    <option><?php echo $mg->pangkat ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <input type="text" name="nm_skl_uv" id="nm_skl_uv" class="form-control" placeholder="Masukkan Nama Sekolah / Universitas" value="<? echo $sekolah->nm_skl_uv?>">
                         </div>
                     </div>
                 </div>
@@ -56,28 +59,10 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
-                            <label for="tmt_pkt">TMT Pangkat</label>
+                            <label for="lokasi">Lokasi</label>
                         </div>
                         <div class="col-md-7">
-                            <div class="input-group">
-                                <input type="date" name="tmt_pkt" id="tmt_pkt" class="form-control">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="form-row justify-content-md-center">
-                        <div class="col-md-2 text-right mt-2">
-                            <label for="pjb_pgs_pkt">Pejabat Pengesah SK</label>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" name="pjb_pgs_pkt" id="pjb_pgs_pkt" class="form-control" placeholder="Masukkan Nama Pejabat">
+                            <input type="text" name="lokasi" id="lokasi" class="form-control" placeholder="Masukkan Lokasi" value="<? echo $sekolah->lokasi ?>">
                         </div>
                     </div>
                 </div>
@@ -85,15 +70,26 @@
                 <div class="form-group">
                     <div class="form-row justify-content-md-center">
                         <div class="col-md-2 text-right mt-2">
-                            <label for="">No dan Tanggal SK</label>
+                            <label for="jurusan">Jurusan</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" name="jurusan" id="jurusan" class="form-control" placeholder="Masukkan Jurusan" value="<? echo $sekolah->jurusan ?>">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row justify-content-md-center">
+                        <div class="col-md-2 text-right mt-2">
+                            <label for="no_ijz">No, Tanggal Ijazah</label>
                         </div>
                         <div class="col-md-7">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <input type="text" name="no_sk_pkt" id="no_sk_pkt" class="form-control" placeholder="Masukkan No. SK">
+                                    <input type="text" name="no_ijz" id="no_ijz" class="form-control" placeholder="Masukkan No. Ijazah" value="<? echo $sekolah->no_ijz ?>">
                                 </div>
                                 <div class="col-md-6 input-group">
-                                    <input type="date" name="tgl_sk_pkt" id="tgl_sk_pkt" class="form-control">
+                                    <input type="date" name="tgl_ijz" id="tgl_ijz" class="form-control" value="<? echo $sekolah->tgl_ijz ?>">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
                                     </div>
@@ -104,9 +100,20 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="form-row justify-content-md-center">
+                        <div class="col-md-2 text-right mt-2">
+                            <label for="nm_ks_rk">Nama Kepsek / Rektor</label>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" name="nm_ks_rk" id="nm_ks_rk" class="form-control" placeholder="Masukkan Nama Kepsek / Rektor" value="<? echo $sekolah->nm_ks_rk ?>">
+                        </div>
+                    </div>
+                </div>
+
         </div>
         <div class="card-footer text-center">
-            <a href="<?php echo base_url('pegawai/dashboard'); ?>" class="btn btn-danger btn-sm"><i class=" fas fa-arrow-left"></i> Kembali</a>
+            <a href="<?php echo base_url('supervisor/beranda'); ?>" class="btn btn-danger btn-sm"><i class=" fas fa-arrow-left"></i> Kembali</a>
             <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Simpan</button>
         </div>
 

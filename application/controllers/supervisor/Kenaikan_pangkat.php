@@ -429,6 +429,7 @@ class Kenaikan_pangkat extends CI_Controller
             'pnkt' => $pnkt
         ];
 
+
         $this->db->insert('surat_pak', $data2);
 
         $this->session->set_flashdata('message', 'selesai');

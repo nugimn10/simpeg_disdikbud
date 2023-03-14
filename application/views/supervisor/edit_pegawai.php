@@ -286,7 +286,7 @@
                 </div> -->
         </div>
         <div class="card-footer text-center">
-            <a href="<?php echo base_url('admin/data_pegawai'); ?>" class="btn btn-danger btn-sm"><i class=" fas fa-arrow-left"></i> Kembali</a>
+            <a href="<?php echo base_url('supervisor/data_pegawai'); ?>" class="btn btn-danger btn-sm"><i class=" fas fa-arrow-left"></i> Kembali</a>
             <button type="submit" name="ubah" class="btn btn-primary btn-sm"><i class="fas fa-save"></i> Update</button>
         </div>
 

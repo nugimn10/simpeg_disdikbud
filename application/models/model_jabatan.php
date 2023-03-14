@@ -6,6 +6,12 @@ class Model_jabatan extends CI_Model
     {
         $this->db->insert('jabatan', $data);
     }
+    
+    public function tampil_by_id($id)
+    {
+        return $this->db->get_where('jabatan', ['id_jabatan' => $id])->row();
+    }
+
 
     public function tampil_by_id_pegawai($id)
     {
@@ -32,5 +38,17 @@ class Model_jabatan extends CI_Model
 
         // $this->db->where('id_pegawai', $id);
         // return $query;
+    }
+    
+    public function edit_jabatan($data)
+    {
+        $this->db->where('id_jabatan', $this->input->post('id_jabatan'));
+        $this->db->update('jabatan', $data);
+    }
+
+    public function hapus_jabatan($where, $table)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
     }
 }

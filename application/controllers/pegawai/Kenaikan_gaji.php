@@ -31,7 +31,9 @@ class Kenaikan_gaji extends CI_Controller
             'detail' => $this->model_pegawai->tampil_by_id($id),
             'master_kgb' => $this->model_master_kgb->tampil_semua(),
             'kelengkapan' => $this->model_kelengkapan->tampil_by_id_pegawai($id),
-            'kgb' => $this->model_kgb->tampil_by_id_pegawai($id)
+            'kgb' => $this->model_kgb->tampil_by_id_pegawai($id),
+            'pangkat' => $this->model_pangkat->tampil_by_id_pegawai($id),
+            'jabatan' => $this->model_jabatan->tampil_by_id_pegawai($id)
         ];
 
         $this->load->view('templates/header', $data);
@@ -80,35 +82,27 @@ class Kenaikan_gaji extends CI_Controller
     public function ajukan($id)
     {
         $pegawai = $this->model_pegawai->tampil_by_id($id);
-
+        $kgb = $this->model_kgb->tampil_by_id_pegawai($id);
         $data = [
-            // 'nip'        => $pegawai->nip,
-            // 'nik'        => $pegawai->nik,
-            // 'nuptk'      => $pegawai->nuptk,
-            // 'nm_pegawai' => $pegawai->nm_pegawai,
-            // 'jk'         => $pegawai->jk,
-            // 'uk'         => $pegawai->uk,
-            // 'noserdik'   => $pegawai->noserdik,
-            // 'kec'        => $pegawai->kec,
-            // 'tpt_lhr'    => $pegawai->tpt_lhr,
-            // 'tgl_lhr'    => $pegawai->tgl_lhr,
-            // 'agama'      => $pegawai->agama,
-            // 'gol_darah'   => $pegawai->gol_darah,
-            // 'stts_pnkh'   => $pegawai->stts_pnkh,
-            // 'stts_kpgw'   => $pegawai->stts_kpgw,
-            // 'no_hp'      => $pegawai->no_hp,
-            // 'email'      => $pegawai->email,
-            // 'alamat'     => $pegawai->alamat,
-            // 'tgl_msk'    => $pegawai->tgl_msk,
-            // 'tgl_knk_pkt' => $pegawai->tgl_knk_pkt,
-            // 'tgl_knk_gj'  => $pegawai->tgl_knk_gj,
-            // 'status' => $pegawai->status,
             'stts_knk_gj' => "1"
         ];
         
+        $data2 = [
+            'pegawai_id' => $id,
+            'catatan' => "",
+            'status' => "1",
+            'last_update' =>  date("Y-m-d")
+        ];
+        if ($kgb == null) {
+            $this->model_kgb->tambah_kgb($data2);    
+        } else {    
+            $this->db->where('pegawai_id', $id);
+            $this->db->update('kgb', $data2);
+        }
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data);
-        $this->session->set_flashdata('message', 'Diubah');
+
+        $this->session->set_flashdata('message', 'Diajukan ke supervisor');
         redirect('pegawai/kenaikan_gaji/kgb/'.$id);
     }
 

@@ -55,12 +55,6 @@ class Data_pegawai extends CI_Controller
             $nuptk      = $this->input->post('nuptk');
             $nm_pegawai = $this->input->post('nm_pegawai');
             $jk         = $this->input->post('jk');
-            $jg         = $this->input->post('jg');
-            $tm         = $this->input->post('tm');
-            $noserdik   = $this->input->post('noserdik');
-            $nokarpeg   = $this->input->post('nokarpeg');
-            $uk         = $this->input->post('uk');
-            $kec        = $this->input->post('kec');
             $tpt_lhr    = $this->input->post('tpt_lhr');
             $tgl_lhr    = $this->input->post('tgl_lhr');
             $agama      = $this->input->post('agama');
@@ -90,15 +84,9 @@ class Data_pegawai extends CI_Controller
             $data = [
                 'nip'        => $nip,
                 'nik'        => $nik,
-                'nuptk'      => $nuptk,
+                'nuptk'        => $nuptk,
                 'nm_pegawai' => $nm_pegawai,
                 'jk'         => $jk,
-                'jg'         => $jg,
-                'tm'         => $tm,
-                'uk'         => $uk,
-                'noserdik'   => $noserdik,
-                'nokarpeg'   => $nokarpeg,
-                'kec'        => $kec,
                 'tpt_lhr'    => $tpt_lhr,
                 'tgl_lhr'    => $tgl_lhr,
                 'agama'      => $agama,
@@ -214,7 +202,7 @@ class Data_pegawai extends CI_Controller
 
             $this->model_pegawai->edit_pegawai($data);
             $this->session->set_flashdata('message', 'Diubah');
-            redirect('admin/data_pegawai');
+            redirect('supervisor/data_pegawai');
         }
     }
 

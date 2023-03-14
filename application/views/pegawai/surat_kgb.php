@@ -23,34 +23,35 @@
 </head>
 
 <body>
-    <table align="left" border="0" cellpadding="0" cellspacing="0" style="width:100% ; height:10px">
+    <table align="left" border="0" style="width:100% ; height:10px; border-collapse: collapse;">
 	<tbody>
 		<tr>
-			<td style="width:25%; vertical-align:top">
-			<p style="text-align:center; vertical-align:top"><span style="font-size:14px"><span style="font-family:Times New Roman,Times,serif; vertical-align:top"><strong>PEMERINTAH KABUPATEN LEBAK</strong></span></span><br />
-			<span style="font-size:22px"><span style="font-family:Times New Roman,Times,serif; vertical-align:top"><strong>DINAS PENDIDIKAN</strong></span></span><br />
-			<span style="font-size:14px"><span style="font-family:Times New Roman,Times,serif; vertical-align:top"><strong>JALAN SILIWANGI (0252)280786</strong></span><br />
-			<span style="font-family:Times New Roman,Times,serif; vertical-align:top"><strong>RANGKASBITUNG</strong></span></span></p>
+			<td style="width:35%; ">
+			<p style="text-align:center;"><span style="font-size:14px"><span style="font-family:Times New Roman,Times,serif; "><strong>PEMERINTAH KABUPATEN LEBAK</strong></span></span><br />
+			<span style="font-size:22px"><span style="font-family:Times New Roman,Times,serif; "><strong>DINAS PENDIDIKAN</strong></span></span><br />
+			<span style="font-size:14px"><span style="font-family:Times New Roman,Times,serif; "><strong>JALAN SILIWANGI (0252)280786</strong></span><br />
+			<span style="font-family:Times New Roman,Times,serif; "><strong>RANGKASBITUNG</strong></span></span></p>
 
 			<hr />
 			<p style="text-align:top-center">&nbsp;</p>
 			</td>
-			<td style="text-align:left;vertical-align:center; width:20%"><img src="<?php echo base_url(); ?>assets/img/logo_disdikbud.jpg" width="100" height="100"></td>
+			<td style="text-align:left;vertical-align:top; width:45%"><img src="<?php echo base_url(); ?>assets/img/logo_disdikbud.jpg" width="100" height="100"></td>
             <td style="text-align:right;vertical-align:top; width:10%">Model E.I</td>
 		</tr>
 	</tbody>
 </table>
 <!-- <p style="text-align:justify"><span style="font-size:12px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Nomor : {nomor-surat} </span></p>
 <p style="text-align:justify"><span style="font-size:12px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Perihal : Kenaikan Gaji Berkala </span></p> -->
-<font size="2" face="Courier New" >
-<table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+<br><br><br><br><br><br>
+<font size="12px" face="Courier New" >
+<table align="left" border="0"  style="width: 100%; height:10px; border-collapse: collapse;">
 	<tbody>
 		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Nomor &nbsp; &nbsp; :  &nbsp; &nbsp; &nbsp;<?php echo $surat_kgb->nmr_surat; ?></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Nomor &nbsp; &nbsp;:  &nbsp; &nbsp; &nbsp;<?php echo $surat_kgb->nmr_surat; ?></td>
             <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rangkasbitung, <?php echo date('d-m-Y'); ?> </td>
 		</tr>
 		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Perihal  &nbsp;  &nbsp;:  &nbsp; &nbsp; &nbsp; Kenaikan Gaji Berkala</td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Perihal&nbsp; &nbsp; :  &nbsp; &nbsp; &nbsp; Kenaikan Gaji Berkala</td>
             <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Kepada</td>
 		</tr>
         <tr>
@@ -74,37 +75,18 @@
         
 	</tbody>
 </table>
-<!-- <table align="right" border="0" cellpadding="0" cellspacing="0" style="width:40%">
-	<tbody>
-		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rangkasbitung, <?php echo date('d-m-Y', strtotime($surat_kgb->tgl_berlaku)); ?> </td>
-		</tr>
-		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Kepada</td>
-		</tr>
-		<tr>
-			<td>Yth.&nbsp; Kepa Badan Keuangan</td>
-		</tr>
-		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Dan Aset Daerah Kabupaten Lebak</td>
-		</tr>
-		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Di</td>
-		</tr>
-		<tr>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Rangkasbitung</td>
-		</tr>
-	</tbody>
-</table> -->
-
 </font>
-<p>&nbsp;</p>
-
-<p style="text-align:justify">&nbsp;&nbsp;<span style="font-size:14px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Dengan ini diberitahukan, bahwa berhubung dengan telah dipenuhinya masa kerja dan syarat-syarat </span></p>
-
-<p style="text-align:justify"><span style="font-size:14px">Lainya kepada :</span></p>
-<font size="2" face="Courier New" >
+<br><br><br><br><br>
+<font size="12px" face="Courier New" >
 <table align="left" border="0" cellpadding="0" cellspacing="0" style="width:80%">
+    <tr><td>
+        <p style="text-align:justify">&nbsp;&nbsp;<span style="font-size:12px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Dengan ini diberitahukan, bahwa berhubung dengan telah dipenuhinya masa kerja dan syarat-syarat lainya Kepada :</span></p>
+    </td></tr>
+</table>
+</font>
+<br><br><br>
+<font size="12px" face="Courier New" >
+<table align="left" border="0"  style="width: 97.9615%; border-collapse: collapse; height: 675px;">
 	<tbody>
 		<tr>
 			<td style="width:23px ">1</td>
@@ -154,29 +136,21 @@
 			<td style="width:185px">&nbsp;</td>
 		</tr>
 		<tr>
-			<td style="width:23px">&nbsp;</td>
-			<td style="width:340px">&nbsp;</td>
-			<td style="width:30px">&nbsp;</td>
-			<td style="width:345px">&nbsp;</td>
-			<td style="width:185px">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:23px">&nbsp;</td>
-			<td style="width:340px">&nbsp;</td>
-			<td style="width:30px">&nbsp;</td>
-			<td style="width:345px">&nbsp;</td>
-			<td style="width:185px">&nbsp;</td>
-		</tr>
-		<tr>
 			<td style="width:23px">5</td>
 			<td style="width:340px">Gaji Pokok Lama</td>
 			<td style="width:30px">:</td>
-			<td style="width:345px"><?php echo $surat_kgb->gj_lama?></td>
+			<td style="width:345px"><?php 
+			function rupiah($angka){
+	
+				$hasil_rupiah = "Rp " . number_format($angka,2,',','.');
+				return $hasil_rupiah;
+			
+			} echo rupiah($surat_kgb->gj_lama)?></td>
 			<td style="width:185px">&nbsp;</td>
 		</tr>
 		<tr>
 			<td style="width:23px">&nbsp;</td>
-			<td colspan="3" rowspan="1" style="width:821px">(atas dasar sk terakhir tenttang gaji pangkat yang ditentukan)</td>
+			<td colspan="3" rowspan="1" style="width:821px">(atas dasar sk terakhir tentang gaji pangkat yang ditentukan)</td>
 			<td style="width:185px">&nbsp;</td>
 		</tr>
 		<tr>
@@ -236,17 +210,10 @@
 			<td style="width:185px">&nbsp;</td>
 		</tr>
 		<tr>
-			<td style="width:23px">&nbsp;</td>
-			<td style="width:340px">&nbsp;</td>
-			<td style="width:30px">&nbsp;</td>
-			<td style="width:345px">&nbsp;</td>
-			<td style="width:185px">&nbsp;</td>
-		</tr>
-		<tr>
 			<td style="width:23px">6</td>
 			<td style="width:340px">Gaji Pokok Baru</td>
 			<td style="width:30px">:</td>
-			<td style="width:345px">&nbsp;<?php echo $surat_kgb->gj_baru ?></td>
+			<td style="width:345px">&nbsp;<?php echo rupiah($surat_kgb->gj_baru)?></td>
 			<td style="width:185px">&nbsp;</td>
 		</tr>
         <?php 
@@ -353,7 +320,7 @@
 			<td style="width:23px">&nbsp;</td>
 			<td style="width:340px">b. Yang bersangkutan adalah</td>
 			<td style="width:30px">:</td>
-			<td style="width:345px">Pegawai Negri Sipil</td>
+			<td style="width:345px">Pegawai Negeri Sipil</td>
 			<td style="width:185px">&nbsp;</td>
 		</tr>
 		<tr>
@@ -371,85 +338,110 @@
 	</tbody>
 </table>
 </font>
-<p style="text-align:justify">&nbsp;</p>
-
-
-
-<p><span style="font-size:14px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Sesuai dengan PP Nomor 15 Tahun 2019 diharap agar kepada Pegawai tersebut dibayarkan penghasilanya Berdasarkan gaji pokok baru.</span></p>
-
-<font size="2" face="Courier New" >
-<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
-	<tbody>
-		<tr>
-			<td style="width:310px">&nbsp;</td>
-			<td style="width:5%">&nbsp;</td>
-			<td style="width:25%">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:310px">&nbsp;</td>
-			<td style="text-align:right; width:151px"><span style="font-size:12px">A.n&nbsp;</span></td>
-			<td style="width:417px"><span style="font-size:12px">BUPATI LEBAK</span></td>
-		</tr>
-		<tr>
-			<td style="width:310px">&nbsp;</td>
-			<td style="text-align:right; width:151px">&nbsp;</td>
-			<td style="width:417px"><span style="font-size:12px">KEPALA DINAS PENDIDIKAN&nbsp;</span></td>
-		</tr>
-		<tr>
-			<td style="width:310px">&nbsp;</td>
-			<td style="width:151px">&nbsp;</td>
-			<td style="width:417px"><span style="font-size:12px">KABUPATEN LEBAK</span></td>
-		</tr>
-		<tr>
-			<td style="width:310px">&nbsp;</td>
-			<td style="width:151px">&nbsp;</td>
-			<td colspan="1" rowspan="5" style="width:417px"><span style="font-size:12px">                            <img src="<?php echo base_url() ?>assets/img/barcode.jpg" width="90" height="90">
-</span></td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">Tembusan disampaikan Kepada</span></td>
-			<td style="width:151px">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">1. Yth. Gubernur Banten</span></td>
-			<td style="width:151px">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">2. Yth. Kepala Kantor Regional III BKN Bandung</span></td>
-			<td style="width:151px">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">3. Yth Inspektur Inspektorat Kabupaten Lebak</span></td>
-			<td style="width:151px">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">4. Yth Kepala Badan Kepegawaian Dan Penembangan</span></td>
-			<td style="width:151px">&nbsp;</td>
-			<td style="width:417px"><span style="font-size:12px"><?php echo $surat_kgb->nm_kadis ?></span></td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Sumber Daya Manusia Kabupaten Lebak</span></td>
-			<td style="width:151px">&nbsp;</td>
-			<td style="width:417px"><span style="font-size:12px"><?php echo $surat_kgb->pnkt ?></span></td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">5. Yth. Pembuat Daftar Gaji</span></td>
-			<td style="width:151px">&nbsp;</td>
-			<td style="width:417px"><span style="font-size:12px">NIP : <?php echo $surat_kgb->nip_kadis ?></span></td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">6. Yth. PT Taspen</span></td>
-			<td style="width:151px">&nbsp;</td>
-			<td style="width:417px">&nbsp;</td>
-		</tr>
-		<tr>
-			<td style="width:310px"><span style="font-size:12px">7. Pegawai ybs untuk diketahui dan dipergunakan seperlunya</span></td>
-			<td style="width:151px">&nbsp;</td>
-			<td style="width:417px">&nbsp;</td>
-		</tr>
-	</tbody>
+<br><br><br><br><br><br>
+<font size="12px" face="Courier New" >
+<table align="left" border="0" style="width: 97.9615%; border-collapse: collapse; height: 675px;">
+    <tr><td>
+    <p><span style="font-size:12px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sesuai dengan PP Nomor 15 Tahun 2019 diharap agar kepada Pegawai tersebut dibayarkan penghasilanya <br /> Berdasarkan gaji pokok baru.</span></p>
+    </td></tr>
 </table>
 </font>
+<!--<font size="12px" face="Courier New" >-->
+<!--<table align="center" border="0" style="width:100%; border-collapse: collapse; height: 675px;">-->
+<!--	<tbody>-->
+<!--		<tr>-->
+<!--			<td style="width:350px">&nbsp;</td>-->
+<!--			<td style="text-align:right; width:151px"><span style="font-size:12px">A.n&nbsp;</span></td>-->
+<!--			<td style="width:417px"><span style="font-size:12px">BUPATI LEBAK</span></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">Tembusan disampaikan Kepada</span></td>-->
+<!--			<td style="text-align:right; width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px"><span style="font-size:12px">KEPALA DINAS PENDIDIKAN&nbsp;</span></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">1. Yth. Gubernur Banten</span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px"><span style="font-size:12px">KABUPATEN LEBAK</span></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">2. Yth. Kepala Kantor Regional III BKN Bandung</span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+			<!--<td colspan="1" rowspan="3" style="width:417px"><span style="font-size:12px"><img src="<?php echo base_url() ?>assets/img/barcode.jpg" width="80" height="70">-->
+<!--</span></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">3. Yth Inspektur Inspektorat Kabupaten Lebak</span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">4. Yth Kepala Badan Kepegawaian Dan Penembangan Sumber Daya Manusia Kabupaten Lebak</span></td>-->
+<!--            <td style="width:151px">&nbsp;</td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+		    
+<!--			<td style="width:350px">&nbsp;</td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px"><span style="font-size:12px"><?php echo $surat_kgb->nm_kadis ?></span></td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px"></span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px"><span style="font-size:12px"><?php echo $surat_kgb->pnkt ?></span></td>		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">5. Yth. Pembuat Daftar Gaji</span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px"><span style="font-size:12px">NIP : <?php echo $surat_kgb->nip_kadis ?></span></td>		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">6. Yth. PT Taspen</span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px">&nbsp;</td>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			<td style="width:350px"><span style="font-size:12px">7. Pegawai ybs untuk diketahui dan dipergunakan seperlunya</span></td>-->
+<!--			<td style="width:151px">&nbsp;</td>-->
+<!--			<td style="width:417px">&nbsp;</td>-->
+<!--		</tr>-->
+<!--	</tbody>-->
+<!--</table>-->
+<!--</font>-->
+<br><br><br><br><br><br>
+<font size="12px" face="Courier New">
+    <table align="left" border="0" style="width: 97.9615%; border-collapse: collapse; height: 675px;">
+            <tbody>
+                <tr style="height: 163px;">
+                    <td style="width: 35%; height: 163px;">
+                        <p>Tembusan disampaikan Kepada :<br />
+						1. Yth. Gubernur Banten<br />
+						2. Yth. Kepala Kantor Regional III BKN Bandung<br />
+						3. Yth Inspektur Inspektorat Kabupaten Lebak<br />
+						4. Yth Kepala Badan Kepegawaian Dan Penembangan<br />
+						5. Yth. Pembuat Daftar Gaji<br />
+						6. Yth. PT Taspen<br />
+						7. Pegawai ybs untuk diketahui dan dipergunakan seperlunya</p>
+                    </td>
+                    <td style="width: 30%; height: 163px;">&nbsp;</td>
+                    <td style="width: 35%; height: 163px;">
+                        <p><br><br>A.n&nbsp; &nbsp;BUPATI LEBAK<br />
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;KEPALA DINAS PENDIDIKAN<br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;KABUPATEN LEBAK
+                        <!--Pada Tanggal&nbsp; &nbsp; &nbsp; : <?php echo date('d-m-Y', strtotime($surat_kgb->tgl_surat)); ?><br />Kepala Dinas Pendidikan<br />Kabupaten Lebak-->
+                        <br />
+                        <br />
+                        <br />
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="<?php echo base_url() ?>assets/img/barcode.jpg" width="80" height="80">
+                        <br />
+
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<?php echo $surat_kgb->nm_kadis ?><br />
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<?php echo $surat_kgb->pnkt ?><br />
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NIP. <?php echo $surat_kgb->nip_kadis ?>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </font>
+
 
 
 </body>

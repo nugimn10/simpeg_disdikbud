@@ -32,11 +32,11 @@
         </li>
 
         <!-- Nav Item -->
-        <li class="nav-item <?php echo $this->uri->segment(2) == 'izin' ? 'active' : null; ?>">
-            <a class="nav-link" href="<?php echo base_url('pegawai/izin_pegawai/izin/'); ?><?php echo $user['id_pegawai']; ?>">
-                <i class="fas fa-fw fa-book"></i>
-                <span>Izin</span></a>
-        </li>
+        <!--<li class="nav-item <?php echo $this->uri->segment(2) == 'izin' ? 'active' : null; ?>">-->
+        <!--    <a class="nav-link" href="<?php echo base_url('pegawai/izin_pegawai/izin/'); ?><?php echo $user['id_pegawai']; ?>">-->
+        <!--        <i class="fas fa-fw fa-book"></i>-->
+        <!--        <span>Izin</span></a>-->
+        <!--</li>-->
 
          <!-- <li class="nav-item <?php echo $this->uri->segment(2) == 'pak' ? 'active' : null; ?>">
             <a class="nav-link" href="<?php echo base_url(); ?>pegawai/pak">
@@ -88,10 +88,10 @@
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Sekolah</span>
                     </a>
-                    <a class="collapse-item <?php echo $this->uri->segment(3) == 'kelengkapan' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_pendidikan/kelengkapan">
-                        <i class="fas fa-fw fa-briefcase"></i>
-                        <span>Kelengkapan</span>
-                    </a>
+                    <!--<a class="collapse-item <?php echo $this->uri->segment(3) == 'kelengkapan' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_pendidikan/kelengkapan">-->
+                    <!--    <i class="fas fa-fw fa-briefcase"></i>-->
+                    <!--    <span>Kelengkapan</span>-->
+                    <!--</a>-->
                     <!-- <a class="collapse-item <?php echo $this->uri->segment(3) == 'bahasa' ? 'active' : null; ?>" href="<?php echo base_url(); ?>pegawai/riwayat_pendidikan/bahasa">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Bahasa</span>

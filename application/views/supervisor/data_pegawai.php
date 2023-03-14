@@ -40,7 +40,7 @@
                 <tbody>
             <?php $no = 1;
             foreach ($pegawai as $pgw) : ?>
-                    <tr> 
+                    <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $pgw->nip ?></td>
                         <td style="width: 150px;"><?php echo $pgw->nm_pegawai ?></td>

@@ -128,7 +128,7 @@ class Kenaikan_pangkat extends CI_Controller
     }
 
     public function pak($id){
-        $this->load->library('dompdf_gen');
+        $this->load->library('Dompdf_gen');
 
         $data = [
             'title' => 'Halaman Cetak PAK',

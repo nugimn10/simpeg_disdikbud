@@ -42,17 +42,19 @@
                                                                 <a class="btn btn-primary" href="<?=base_url('./upload/kgb/'.$klkn->dokumen)?>" target="_blank">Periksa</a>                                            
                                                             </td>
                                                             <!-- <td> -->
-                                                            <?php echo form_open_multipart('supervisor/kenaikan_pangkat/teruskan/'. $detail->id_pegawai);?>
+                                                            <?php echo form_open_multipart('supervisor/kenaikan_gaji/btl/'. $detail->id_pegawai);?>
                                                                 <input id="<?php echo $klkn->id_kelengkapan;?>" name="<?php echo $klkn->id_kelengkapan;?>" type="hidden"  value="<?php echo $klkn->nilai ?>"></input> 
                                                             <!-- </td> -->
+                                                            
                                                         </tr>
                                                         <?php } ?>
                                                     <?php endforeach; ?> 
+                                                    
+                                            <?php echo form_close();?>
                                                 </tbody>
                                             </table>
                                                     <!-- <p align="right"><button type="submit" class="btn btn-primary">Lanjutkan Ke Verifikator</button></p>        -->
                                                     
-                                            <?php echo form_close();?>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="card  text-center" style="width: 18rem;">
@@ -84,20 +86,22 @@
 
                                             
                                             <!--Material textarea-->
-                                            
+                                            <?php echo form_open_multipart('supervisor/kenaikan_gaji/btl/'. $detail->id_pegawai);?>
                                             <?php echo form_open_multipart('supervisor/kenaikan_gaji/');?>
                                             <div class="md-form">
                                                 <p>Catatan Untuk Pegawai :</p>
                                                 <textarea name="notes" class="md-textarea form-control" rows="4" cols=100%></textarea>
                                             </div>
                                                     <p align="center"> <br> <?php if ( $detail->stts_knk_gj >= 1 ){?>
-                                                        <!-- <a href="<?php echo base_url('supervisor/kenaikan_pangkat/tolak/'. $detail->id_pegawai); ?>" class="btn btn-danger">TMS</a> 
-                                                        <a href="<?php echo base_url('supervisor/kenaikan_pangkat/btl/'. $detail->id_pegawai); ?>" class="btn btn-warning">BTL</a>      -->
+                                                        <!-- <a href="<?php echo base_url('supervisor/kenaikan_pangkat/tolak/'. $detail->id_pegawai); ?>" class="btn btn-danger">TMS</a>  -->
+                                                        <!-- <a href="<?php echo base_url('supervisor/kenaikan_gaji/btl/'. $detail->id_pegawai); ?>" class="btn btn-warning">BTL</a>      -->
                                                         
                                                         
                                                         <button type="submit" class="btn btn-warning" name="btl" value="y">BTL</button>
                                                         <a href="" class="btn btn-success"  data-toggle="modal" data-target="#buat_nomor_surat">Selesai</a>      
                                                     <?php } ?></p> 
+                                                    
+                                            <?php echo form_close();?>
                                             <?php echo form_close();?>
                                             </div>                                     
                                         </div>

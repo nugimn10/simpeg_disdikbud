@@ -52,7 +52,6 @@ class Cetak_pak extends CI_Controller
             'surat_pak' => $this->db->get_where('surat_pak',['pegawai_id' => $id])->row(),
             'mutasi' => $this->model_mutasi->tampil_by_id_pegawai($id)
         ];
-        
         // $dump = $this->model_pak->tampil_by_id_pegawai($id);
         // var_dump($dump);
 
@@ -68,7 +67,7 @@ class Cetak_pak extends CI_Controller
         
         $this->dompdf->load_html($html);
         $this->dompdf->render();
-        $this->dompdf->stream("Penetapan_Angka_Kredit_".$detail->nip.".pdf", array('Attachment ' => 0 ));
+        $this->dompdf->stream("Penetapan_Angka_Kredit_".$detail->nip.".pdf", array('Attachment ' => 1 ));
 
         $pegawai = $this->model_pegawai->tampil_by_id($id);
 
@@ -99,7 +98,7 @@ class Cetak_pak extends CI_Controller
         
         $this->db->where('id_pegawai', $id);
         $this->db->update('pegawai', $data);
-        // redirect('admin/cetak_pak/');
+        // redirect('Admin/cetak_pak/');
     }
     
     public function selesai($id){
@@ -141,4 +140,5 @@ class Cetak_pak extends CI_Controller
         $this->session->set_flashdata('message', '');
         redirect('admin/cetak_pak/');
     }
+    
 }
